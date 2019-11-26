@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">SchoolSchedule</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_whats_now">Что сейчас?</string>
+    <string name="title_lessons_schedule">Расписание уроков</string>
+    <string name="title_lessons_schedule_short">Расписание</string>
+    <string name="title_my_teachers">Мои учителя</string>
+    <string name="title_my_teachers_short">Учителя</string>
+    <string name="title_calls_schedule">Расписание звонков</string>
+    <string name="title_calls_schedule_short">Звонки</string>
+    <string name="title_subjects">Предметы</string>
+</resources>
