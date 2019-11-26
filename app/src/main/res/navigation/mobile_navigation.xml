@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_whatsNow">
+
+
+    <fragment
+        android:id="@+id/navigation_callsSchedule"
+        android:name="com.meranged.schoolschedule.ui.callsschedule.CallsScheduleFragment"
+        android:label="@string/title_calls_schedule"
+        tools:layout="@layout/calls_schedule_fragment" />
+    <fragment
+        android:id="@+id/navigation_lessons_schedule"
+        android:name="com.meranged.schoolschedule.ui.lessonsschedule.LessonsShceduleFragment"
+        android:label="@string/title_lessons_schedule"
+        tools:layout="@layout/lessons_shcedule_fragment" >
+        <action
+            android:id="@+id/action_navigation_lessons_schedule_to_dayDetailsFragment"
+            app:destination="@id/dayDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_subjects"
+        android:name="com.meranged.schoolschedule.ui.subjects.SubjectsFragment"
+        android:label="@string/title_subjects"
+        tools:layout="@layout/subjects_fragment" >
+        <action
+            android:id="@+id/action_navigation_subjects_to_subjectDetailsFragment"
+            app:destination="@id/subjectDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_whatsNow"
+        android:name="com.meranged.schoolschedule.ui.whatsnow.WhatsNowFragment"
+        android:label="@string/title_whats_now"
+        tools:layout="@layout/whats_now_fragment" />
+    <fragment
+        android:id="@+id/navigation_myTeachers"
+        android:name="com.meranged.schoolschedule.ui.myteachers.MyTeachersFragment"
+        android:label="@string/title_my_teachers"
+        tools:layout="@layout/my_teachers_fragment" >
+        <action
+            android:id="@+id/action_navigation_myTeachers_to_teacherDetailsFragment"
+            app:destination="@id/teacherDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dayDetailsFragment"
+        android:name="com.meranged.schoolschedule.ui.daydetails.DayDetailsFragment"
+        android:label="day_details_fragment"
+        tools:layout="@layout/day_details_fragment" >
+        <action
+            android:id="@+id/action_dayDetailsFragment_to_navigation_lessons_schedule"
+            app:destination="@id/navigation_lessons_schedule" />
+        <argument
+            android:name="day_id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/teacherDetailsFragment"
+        android:name="com.meranged.schoolschedule.ui.teacherdetails.TeacherDetailsFragment"
+        android:label="teacher_details_fragment"
+        tools:layout="@layout/teacher_details_fragment" >
+        <action
+            android:id="@+id/action_teacherDetailsFragment_to_navigation_myTeachers"
+            app:destination="@id/navigation_myTeachers" />
+        <argument
+            android:name="teacher_id"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
+    <fragment
+        android:id="@+id/subjectDetailsFragment"
+        android:name="com.meranged.schoolschedule.ui.subjectdetails.SubjectDetailsFragment"
+        android:label="subject_details_fragment"
+        tools:layout="@layout/subject_details_fragment" >
+        <action
+            android:id="@+id/action_subjectDetailsFragment_to_navigation_subjects"
+            app:destination="@id/navigation_subjects" />
+        <argument
+            android:name="subject_id"
+            app:argType="long"
+            android:defaultValue="-1L" />
+    </fragment>
+</navigation>
