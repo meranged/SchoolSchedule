@@ -22,6 +22,10 @@ import com.meranged.schoolschedule.database.TimeSlot
 import com.meranged.schoolschedule.databinding.CallsScheduleFragmentBinding
 import com.meranged.schoolschedule.ui.daydetails.DayDetailsViewModel
 import com.meranged.schoolschedule.ui.daydetails.DayDetailsViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 
 class CallsScheduleFragment : Fragment() {
@@ -37,21 +41,25 @@ class CallsScheduleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding = DataBindingUtil.inflate<CallsScheduleFragmentBinding>(inflater,
-            R.layout.calls_schedule_fragment,container,false)
+        val binding = DataBindingUtil.inflate<CallsScheduleFragmentBinding>(
+            inflater,
+            R.layout.calls_schedule_fragment, container, false
+        )
 
         val application = requireNotNull(this.activity).application
         val dataSource = SchoolScheduleDatabase.getInstance(application).dao
         val viewModelFactory = CallsScheduleViewModelFactory(dataSource, application)
         val viewModel =
             ViewModelProviders.of(
-                this, viewModelFactory).get(CallsScheduleViewModel::class.java)
+                this, viewModelFactory
+            ).get(CallsScheduleViewModel::class.java)
 
         binding.callsScheduleViewModel = viewModel
         binding.setLifecycleOwner(this)
 
-        val adapter = CallsScheduleAdapter(CallsScheduleListener { timeslotId ->
-            Toast.makeText(context, "${timeslotId}", Toast.LENGTH_LONG).show()
+        val adapter = CallsScheduleAdapter(CallsScheduleListener { timeslot, ftype ->
+            //Toast.makeText(context, "${timeslotId} + ${ftype}", Toast.LENGTH_LONG).show()
+            onClickShowTimePicker(timeslot, ftype)
         })
 
         binding.slotsList.adapter = adapter
@@ -68,8 +76,46 @@ class CallsScheduleFragment : Fragment() {
         return binding.root
     }
 
-    fun onClickShowTimePicker(item: TimeSlot, fieldtype: Int = 0){
+    fun onClickShowTimePicker(item: TimeSlot, fieldtype: Int) {
 
+
+        var hour = 0
+        var min = 0
+
+        if (fieldtype == 1) {
+            hour = item.startTimeHours
+            min = item.startTimeMinutes
+        } else {
+            hour = item.finishTimeHours
+            min = item.finishTimeMinutes
+        }
+
+
+        val listener =
+            TimePickerDialog.OnTimeSetListener { timePicker: TimePicker, hour: Int, min: Int ->
+                if (fieldtype == 1) {
+                    item.startTimeHours = hour
+                    item.startTimeMinutes = min
+                } else {
+                    item.finishTimeHours = hour
+                    item.finishTimeMinutes = min
+                }
+
+                uts(item)
+            }
+
+        val timePicker = TimePickerDialog(this.context, listener, hour, min, true).show()
+    }
+
+    fun uts(item: TimeSlot) {
+        var viewModelJob = Job()
+
+        val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+
+        uiScope.launch {
+            //TODO это не работает, надо переделать
+            viewModel.updateWeekTimeSlot(item)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -79,28 +125,3 @@ class CallsScheduleFragment : Fragment() {
 
 }
 
-//        var selectedHour = 0
-//        var selectedMin = 0
-//
-//        binding.startOfLesson1.setOnClickListener {
-//
-//            val currentTime = Calendar.getInstance()
-//
-//            var hour = 0
-//            var min = 0
-//
-//            if (binding.startOfLesson1.text.isNotEmpty()){
-//                hour = selectedHour
-//                min = selectedMin
-//            }
-//
-//            val listener = TimePickerDialog.OnTimeSetListener{ timePicker: TimePicker, hour: Int, min: Int ->
-//                selectedHour = hour
-//                selectedMin = min
-//                binding.startOfLesson1.text = "$selectedHour:$selectedMin"
-//            }
-//
-//            val timePicker =  TimePickerDialog(this.context, listener, hour, min, true).show()
-//
-//
-//        }

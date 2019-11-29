@@ -31,10 +31,10 @@ class CallsScheduleViewModel(
         }
     }
 
-    private suspend fun updateWeekTimeSlot(ts: TimeSlot) {
-        withContext(Dispatchers.IO) {
-            db.updateWeekTimeSlot(ts)
-        }
+    suspend fun updateWeekTimeSlot(ts: TimeSlot) {
+            withContext(Dispatchers.IO) {
+                db.updateWeekTimeSlot(ts)
+            }
     }
 
     override fun onCleared() {

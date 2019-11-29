@@ -76,9 +76,9 @@ class CallsScheduleDiffCallback : DiffUtil.ItemCallback<TimeSlot>() {
     }
 }
 
-class CallsScheduleListener(val clickListener: (timeslotId: Long) -> Unit) {
+class CallsScheduleListener(val clickListener: (ts: TimeSlot, ftype: Int) -> Unit) {
 
-    fun onClick(slot: TimeSlot) = clickListener(slot.timeslotId)
+    fun onClick(slot: TimeSlot, ftype: Int) = clickListener(slot, ftype)
 
 }
 
