@@ -49,7 +49,7 @@ class CallsScheduleFragment : Fragment() {
         val application = requireNotNull(this.activity).application
         val dataSource = SchoolScheduleDatabase.getInstance(application).dao
         val viewModelFactory = CallsScheduleViewModelFactory(dataSource, application)
-        val viewModel =
+        viewModel =
             ViewModelProviders.of(
                 this, viewModelFactory
             ).get(CallsScheduleViewModel::class.java)
