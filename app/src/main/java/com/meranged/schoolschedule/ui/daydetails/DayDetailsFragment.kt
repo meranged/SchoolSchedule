@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.meranged.schoolschedule.R
+import com.meranged.schoolschedule.database.SchoolScheduleDatabase
 
 class DayDetailsFragment : Fragment() {
 
@@ -21,6 +22,13 @@ class DayDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val application = requireNotNull(this.activity).application
+        val dataSource = SchoolScheduleDatabase.getInstance(application).dao
+        val viewModelFactory = DayDetailsViewModelFactory(dataSource, application)
+        val dayDetailsViewModel =
+            ViewModelProviders.of(
+                this, viewModelFactory).get(DayDetailsViewModel::class.java)
+
         return inflater.inflate(R.layout.day_details_fragment, container, false)
     }
 

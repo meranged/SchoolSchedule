@@ -1,7 +1,44 @@
 package com.meranged.schoolschedule.ui.callsschedule
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
+import com.meranged.schoolschedule.database.SchoolScheduleDao
+import com.meranged.schoolschedule.database.TimeSlot
+import kotlinx.coroutines.*
 
-class CallsScheduleViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class CallsScheduleViewModel(
+    val database: SchoolScheduleDao,
+    application: Application
+) : AndroidViewModel(application) {
+
+    val db = database
+
+    private var viewModelJob = Job()
+
+    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+
+    val etalon_slots = db.getEtalonTimeSlots()
+
+    init {
+        uiScope.launch {
+            fillDPB()
+        }
+    }
+
+    private suspend fun fillDPB(){
+        withContext(Dispatchers.IO) {
+            db.checkAndFillTimeSlots()
+        }
+    }
+
+    private suspend fun updateWeekTimeSlot(ts: TimeSlot) {
+        withContext(Dispatchers.IO) {
+            db.updateWeekTimeSlot(ts)
+        }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
 }

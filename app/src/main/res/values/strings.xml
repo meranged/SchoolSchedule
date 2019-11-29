@@ -11,4 +11,11 @@
     <string name="title_calls_schedule">Расписание звонков</string>
     <string name="title_calls_schedule_short">Звонки</string>
     <string name="title_subjects">Предметы</string>
+    <string name="title_1_lesson">Первый урок</string>
+    <string name="title_2_lesson">Второй урок</string>
+    <string name="title_3_lesson">Третий урок</string>
+    <string name="title_4_lesson">Четвёртый урок</string>
+    <string name="title_5_lesson">Пятый урок</string>
+    <string name="title_6_lesson">Шестой урок</string>
+    <string name="title_lesson">%1$d урок</string>
 </resources>

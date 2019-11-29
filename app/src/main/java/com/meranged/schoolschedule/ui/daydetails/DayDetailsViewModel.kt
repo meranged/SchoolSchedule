@@ -1,7 +1,12 @@
 package com.meranged.schoolschedule.ui.daydetails
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import com.meranged.schoolschedule.database.SchoolScheduleDao
 
-class DayDetailsViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+
+class DayDetailsViewModel(
+    val database: SchoolScheduleDao,
+    application: Application
+) : AndroidViewModel(application) {
 }
