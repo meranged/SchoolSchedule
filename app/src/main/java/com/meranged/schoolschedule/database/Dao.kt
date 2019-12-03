@@ -80,6 +80,9 @@ interface SchoolScheduleDao {
     @Query("SELECT COUNT(*) FROM teacher")
     fun getCountOfTeachers(): Int
 
+    @Query("SELECT COUNT(*) FROM subject")
+    fun getCountOfSubjects(): Int
+
     @Query("DELETE FROM teacher")
     fun deleteAllTeachers()
 
@@ -175,6 +178,29 @@ interface SchoolScheduleDao {
         insert(teacher)
     }
 
+    @Transaction
+    fun fillSubjectsInitialData(){
+        var subject = Subject()
+        val res = App.context!!.resources
+
+        subject.name = res.getString(R.string.subject1_name)
+        subject.roomNumber = res.getString(R.string.subject_place1)
+        insert(subject)
+
+        subject.name = res.getString(R.string.subject2_name)
+        subject.roomNumber = res.getString(R.string.subject_place1)
+        insert(subject)
+
+        subject.name = res.getString(R.string.subject3_name)
+        subject.roomNumber = res.getString(R.string.subject_place1)
+        insert(subject)
+
+        subject.name = res.getString(R.string.subject4_name)
+        subject.roomNumber = res.getString(R.string.subject_place2)
+        insert(subject)
+
+    }
+
 
     @Transaction
     fun checkAndFillTimeSlots(){
@@ -191,6 +217,15 @@ interface SchoolScheduleDao {
         Log.i("dbdebug","count of teachers = $count")
         if (count < 1){
             fillTeachersInitialData()
+        }
+    }
+
+    @Transaction
+    fun checkAndFillSubjectsList(){
+        val count = getCountOfSubjects()
+        Log.i("dbdebug","count of subjects = $count")
+        if (count < 1){
+            fillSubjectsInitialData()
         }
     }
 }

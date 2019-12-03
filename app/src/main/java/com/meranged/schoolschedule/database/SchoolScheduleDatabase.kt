@@ -8,7 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
     entities = [Subject::class, Teacher::class, TimeSlot::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class SchoolScheduleDatabase : RoomDatabase() {

@@ -10,10 +10,10 @@ data class Subject(
     var subjectId: Long = 0L,
 
     @ColumnInfo(name = "name")
-    val name: String = "",
+    var name: String = "",
 
     @ColumnInfo(name = "room_number")
-    var roomNumber: Int = 0,
+    var roomNumber: String = "",
 
     @ColumnInfo(name = "teacher_id")
     var teacherId: Long = 0L

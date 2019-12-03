@@ -35,4 +35,10 @@
     <string name="add_button_title">Добавить</string>
     <string name="teacher_details_title">Данные учителя</string>
     <string name="teacher_details_new_title">Новый учитель</string>
+    <string name="subject1_name">Математика</string>
+    <string name="subject_place1">203</string>
+    <string name="subject_place2">Спортзал</string>
+    <string name="subject2_name">Русский язык</string>
+    <string name="subject3_name">Английский язык</string>
+    <string name="subject4_name">Физкультура</string>
 </resources>
