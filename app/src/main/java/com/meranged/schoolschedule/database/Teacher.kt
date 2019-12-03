@@ -10,16 +10,16 @@ data class Teacher(
     var teacherId: Long = 0L,
 
     @ColumnInfo(name = "first_name")
-    val firstName: String = "",
+    var firstName: String = "",
 
     @ColumnInfo(name = "second_name")
-    val secondName: String = "",
+    var secondName: String = "",
 
     @ColumnInfo(name = "third_name")
-    val thirdName: String = "",
+    var thirdName: String = "",
 
     @ColumnInfo(name = "nick_name")
-    val nickName: String = "",
+    var nickName: String = "",
 
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB, name = "photo")
     var photo: ByteArray? = null

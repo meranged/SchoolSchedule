@@ -18,4 +18,18 @@
     <string name="title_5_lesson">Пятый урок</string>
     <string name="title_6_lesson">Шестой урок</string>
     <string name="title_lesson">%1$d урок</string>
+    <string name="teacher1_initial_first_name">Иван</string>
+    <string name="teacher1_initial_second_name">Иванович</string>
+    <string name="teacher1_initial_family">Математиков</string>
+    <string name="teacher2_initial_first_name">Аврора</string>
+    <string name="teacher2_initial_second_name">Валентиновна</string>
+    <string name="teacher2_initial_family">Хомякова</string>
+    <string name="teacher3_initial_first_name">Евгения</string>
+    <string name="teacher3_initial_second_name">Викторовна</string>
+    <string name="teacher3_initial_family">Физкультурова</string>
+    <string name="teacher_1_name_title">имя учителя</string>
+    <string name="teacher_2_name_title">отчество учителя</string>
+    <string name="teacher_3_name_title">фамилия учителя</string>
+    <string name="save_button_title">Сохранить</string>
+    <string name="delete_button_title">Удалить</string>
 </resources>

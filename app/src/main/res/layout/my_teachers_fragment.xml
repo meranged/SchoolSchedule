@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.myteachers.MyTeachersFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <data>
+        <variable
+            name="myTeachersViewModel"
+            type="com.meranged.schoolschedule.ui.myteachers.MyTeachersViewModel"/>
+    </data>
+
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/title_my_teachers" />
+        android:scrollbars="vertical"
 
-</FrameLayout>
+        android:id="@+id/my_teachers_list">
+
+
+    </androidx.recyclerview.widget.RecyclerView>
+</layout>

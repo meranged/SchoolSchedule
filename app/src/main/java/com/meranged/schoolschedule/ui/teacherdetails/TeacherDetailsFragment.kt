@@ -6,8 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 
 import com.meranged.schoolschedule.R
+import com.meranged.schoolschedule.databinding.CallsScheduleFragmentBinding
+import com.meranged.schoolschedule.databinding.TeacherDetailsFragmentBinding
 
 class TeacherDetailsFragment : Fragment() {
 
@@ -21,7 +24,14 @@ class TeacherDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.teacher_details_fragment, container, false)
+
+        val binding = DataBindingUtil.inflate<TeacherDetailsFragmentBinding>(
+            inflater,
+            R.layout.teacher_details_fragment, container, false)
+
+        binding.
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

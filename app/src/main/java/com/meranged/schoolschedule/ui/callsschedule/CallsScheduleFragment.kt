@@ -113,14 +113,8 @@ class CallsScheduleFragment : Fragment() {
         val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
         uiScope.launch {
-            //TODO это не работает, надо переделать
             viewModel.updateWeekTimeSlot(item)
         }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
     }
 
 }

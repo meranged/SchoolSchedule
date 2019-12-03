@@ -1,8 +1,11 @@
 package com.meranged.schoolschedule.database
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.meranged.schoolschedule.App
+import com.meranged.schoolschedule.R
 import com.meranged.schoolschedule.getHoursFromMins
 import com.meranged.schoolschedule.getMinsFromMins
 
@@ -73,6 +76,9 @@ interface SchoolScheduleDao {
     @Query("SELECT COUNT(*) FROM time_slot")
     fun getCountOfTimeSlots(): Int
 
+    @Query("SELECT COUNT(*) FROM teacher")
+    fun getCountOfTeachers(): Int
+
     @Query("DELETE FROM teacher")
     fun deleteAllTeachers()
 
@@ -102,7 +108,7 @@ interface SchoolScheduleDao {
     fun deleteTimeSlot(key: Long)
 
     @Transaction
-    fun fillDatabaseInitialData(){
+    fun fillTimeSlotsInitialData(){
 
         var startTimeOfLessonHours = 8
         var startTimeOfLessonMins = 0
@@ -144,11 +150,46 @@ interface SchoolScheduleDao {
     }
 
     @Transaction
+    fun fillTeachersInitialData(){
+
+        val teacher = Teacher()
+        val res = App.context!!.resources
+
+        teacher.firstName = res.getString(R.string.teacher1_initial_first_name)
+        teacher.secondName = res.getString(R.string.teacher1_initial_second_name)
+        teacher.thirdName = res.getString(R.string.teacher1_initial_family)
+
+        insert(teacher)
+
+        teacher.firstName = res.getString(R.string.teacher2_initial_first_name)
+        teacher.secondName = res.getString(R.string.teacher2_initial_second_name)
+        teacher.thirdName = res.getString(R.string.teacher2_initial_family)
+
+        insert(teacher)
+
+        teacher.firstName = res.getString(R.string.teacher3_initial_first_name)
+        teacher.secondName = res.getString(R.string.teacher3_initial_second_name)
+        teacher.thirdName = res.getString(R.string.teacher3_initial_family)
+
+        insert(teacher)
+    }
+
+
+    @Transaction
     fun checkAndFillTimeSlots(){
         val count = getCountOfTimeSlots()
-        Log.i("dbdebug","count = $count")
+        Log.i("dbdebug","count of timeslots = $count")
         if (count < 36){
-            fillDatabaseInitialData()
+            fillTimeSlotsInitialData()
+        }
+    }
+
+    @Transaction
+    fun checkAndFillTeachersList(){
+        val count = getCountOfTeachers()
+        Log.i("dbdebug","count of teachers = $count")
+        if (count < 1){
+            fillTeachersInitialData()
         }
     }
 }
