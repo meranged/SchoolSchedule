@@ -11,6 +11,7 @@ import android.widget.TimePicker
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 
@@ -24,6 +25,7 @@ import com.meranged.schoolschedule.ui.callsschedule.CallsScheduleAdapter
 import com.meranged.schoolschedule.ui.callsschedule.CallsScheduleListener
 import com.meranged.schoolschedule.ui.callsschedule.CallsScheduleViewModel
 import com.meranged.schoolschedule.ui.callsschedule.CallsScheduleViewModelFactory
+import com.meranged.schoolschedule.ui.teacherdetails.TeacherDetailsFragmentDirections
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -79,7 +81,10 @@ class MyTeachersFragment : Fragment() {
 
     fun onClickShowDetails(item: Teacher) {
 
-        Toast.makeText(context, item.toString(), Toast.LENGTH_LONG).show()
+        view!!.findNavController()
+            .navigate(
+                MyTeachersFragmentDirections
+                    .actionNavigationMyTeachersToTeacherDetailsFragment(item.teacherId))
     }
 
 }

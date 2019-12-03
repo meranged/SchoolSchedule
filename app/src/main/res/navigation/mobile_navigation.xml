@@ -41,7 +41,8 @@
         tools:layout="@layout/my_teachers_fragment" >
         <action
             android:id="@+id/action_navigation_myTeachers_to_teacherDetailsFragment"
-            app:destination="@id/teacherDetailsFragment" />
+            app:destination="@id/teacherDetailsFragment"
+            app:popUpTo="@+id/navigation_myTeachers" />
     </fragment>
     <fragment
         android:id="@+id/dayDetailsFragment"

@@ -3,6 +3,7 @@ package com.meranged.schoolschedule.database
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.meranged.schoolschedule.App
 import com.meranged.schoolschedule.R
@@ -62,7 +63,7 @@ interface SchoolScheduleDao {
     fun getSubject(key: Long): Subject?
 
     @Query("SELECT * FROM teacher WHERE teacherId = :key")
-    fun getTeacher(key: Long): Teacher?
+    fun getTeacher(key: Long): LiveData<Teacher>
 
     @Query("SELECT * FROM subject ORDER BY subjectId DESC")
     fun getAllSubjects(): LiveData<List<Subject>>
