@@ -32,4 +32,7 @@
     <string name="teacher_3_name_title">фамилия учителя</string>
     <string name="save_button_title">Сохранить</string>
     <string name="delete_button_title">Удалить</string>
+    <string name="add_button_title">Добавить</string>
+    <string name="teacher_details_title">Данные учителя</string>
+    <string name="teacher_details_new_title">Новый учитель</string>
 </resources>

@@ -27,11 +27,7 @@ class TeacherDetailsViewModel(
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     init {
-
-            Log.i("llog id", teacher_id.toString())
-            teacher=db.getTeacher(teacher_id)
-            Log.i("llog teacher", teacher.toString())
-
+        teacher=db.getTeacher(teacher_id)
     }
 
     /** Coroutine setup variables */

@@ -76,6 +76,13 @@ class MyTeachersFragment : Fragment() {
         val manager = LinearLayoutManager(activity)
         binding.myTeachersList.layoutManager = manager
 
+        binding.fab.setOnClickListener{
+            view!!.findNavController()
+                .navigate(
+                    MyTeachersFragmentDirections
+                        .actionNavigationMyTeachersToTeacherDetailsNewFragment())
+        }
+
         return binding.root
     }
 

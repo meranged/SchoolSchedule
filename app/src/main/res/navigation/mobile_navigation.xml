@@ -43,6 +43,9 @@
             android:id="@+id/action_navigation_myTeachers_to_teacherDetailsFragment"
             app:destination="@id/teacherDetailsFragment"
             app:popUpTo="@+id/navigation_myTeachers" />
+        <action
+            android:id="@+id/action_navigation_myTeachers_to_teacherDetailsNewFragment"
+            app:destination="@+id/teacherDetailsNewFragment" />
     </fragment>
     <fragment
         android:id="@+id/dayDetailsFragment"
@@ -59,7 +62,7 @@
     <fragment
         android:id="@+id/teacherDetailsFragment"
         android:name="com.meranged.schoolschedule.ui.teacherdetails.TeacherDetailsFragment"
-        android:label="teacher_details_fragment"
+        android:label="@string/teacher_details_title"
         tools:layout="@layout/teacher_details_fragment" >
         <action
             android:id="@+id/action_teacherDetailsFragment_to_navigation_myTeachers"
@@ -81,5 +84,13 @@
             android:name="subject_id"
             app:argType="long"
             android:defaultValue="-1L" />
+    </fragment>
+    <fragment
+        android:id="@+id/teacherDetailsNewFragment"
+        android:name="com.meranged.schoolschedule.ui.teacherdetails.TeacherDetailsNewFragment"
+        android:label="@string/teacher_details_new_title" >
+        <action
+            android:id="@+id/action_teacherDetailsNewFragment_to_navigation_myTeachers"
+            app:destination="@id/navigation_myTeachers" />
     </fragment>
 </navigation>
