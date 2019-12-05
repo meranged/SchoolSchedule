@@ -5,9 +5,6 @@
 
     <data>
 
-        <variable
-            name="subjectDetailsViewModel"
-            type="com.meranged.schoolschedule.ui.subjectdetails.SubjectDetailsViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -28,7 +25,6 @@
                 android:ems="10"
                 android:hint="@string/subject_name_title"
                 android:inputType="textPersonName"
-                android:text = "@={subjectDetailsViewModel.subject.name}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -41,12 +37,11 @@
                 android:ems="10"
                 android:hint="@string/subject_room_no_title"
                 android:inputType="textPersonName"
-                android:text = "@={subjectDetailsViewModel.subject.roomNumber}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/subject_name_editText" />
 
-            <EditText
+            <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/subject_teacher_name_editText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -59,21 +54,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/subject_room_no_editText" />
 
             <Button
-                android:id="@+id/delete_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/delete_button_title"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/save_button"
-                app:layout_constraintTop_toBottomOf="@+id/subject_teacher_name_editText" />
-
-            <Button
                 android:id="@+id/save_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/save_button_title"
-                app:layout_constraintEnd_toStartOf="@+id/delete_button"
+                android:text="@string/add_button_title"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/subject_teacher_name_editText" />

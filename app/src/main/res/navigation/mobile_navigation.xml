@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_navigation_subjects_to_subjectDetailsFragment"
             app:destination="@id/subjectDetailsFragment" />
+        <action
+            android:id="@+id/action_navigation_subjects_to_subjectDetailsNewFragment"
+            app:destination="@id/subjectDetailsNewFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_whatsNow"
@@ -75,7 +78,7 @@
     <fragment
         android:id="@+id/subjectDetailsFragment"
         android:name="com.meranged.schoolschedule.ui.subjectdetails.SubjectDetailsFragment"
-        android:label="subject_details_fragment"
+        android:label="@string/subject_details_fragment_title"
         tools:layout="@layout/subject_details_fragment" >
         <action
             android:id="@+id/action_subjectDetailsFragment_to_navigation_subjects"
@@ -92,5 +95,13 @@
         <action
             android:id="@+id/action_teacherDetailsNewFragment_to_navigation_myTeachers"
             app:destination="@id/navigation_myTeachers" />
+    </fragment>
+    <fragment
+        android:id="@+id/subjectDetailsNewFragment"
+        android:name="com.meranged.schoolschedule.ui.subjectdetails.SubjectDetailsNewFragment"
+        android:label="SubjectDetailsNewFragment" >
+        <action
+            android:id="@+id/action_subjectDetailsNewFragment_to_navigation_subjects"
+            app:destination="@id/navigation_subjects" />
     </fragment>
 </navigation>

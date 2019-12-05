@@ -41,4 +41,12 @@
     <string name="subject2_name">Русский язык</string>
     <string name="subject3_name">Английский язык</string>
     <string name="subject4_name">Физкультура</string>
+    <string name="subject_name_title">название предмета</string>
+    <string name="subject_room_no_title">место проведения/кабинет</string>
+    <string name="subject_teacher_name_title">кто ведёт предмет?</string>
+    <string name="subject_details_fragment_title">Предмет</string>
+    <string name="subject_details_new_fragment_title">Новый предмет</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

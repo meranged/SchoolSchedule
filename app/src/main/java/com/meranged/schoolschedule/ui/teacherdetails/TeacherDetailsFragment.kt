@@ -42,7 +42,7 @@ class TeacherDetailsFragment : Fragment() {
 
         // Create an instance of the ViewModel Factory.
         val dataSource = SchoolScheduleDatabase.getInstance(application).dao
-        val viewModelFactory = TeacherDetailsViewModelFactory(arguments!!.teacherId, dataSource, application)
+        val viewModelFactory = TeacherDetailsViewModelFactory(arguments!!.teacherId, dataSource)
 
         // Get a reference to the ViewModel associated with this fragment.
         val teacherDetailsViewModel =

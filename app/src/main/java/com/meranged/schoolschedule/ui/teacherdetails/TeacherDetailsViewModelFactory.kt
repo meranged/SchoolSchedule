@@ -25,8 +25,7 @@ import com.meranged.schoolschedule.ui.callsschedule.CallsScheduleViewModel
 
 class TeacherDetailsViewModelFactory(
     private val teacher_id: Long = 0L,
-    private val dataSource: SchoolScheduleDao,
-    private val application: Application
+    private val dataSource: SchoolScheduleDao
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

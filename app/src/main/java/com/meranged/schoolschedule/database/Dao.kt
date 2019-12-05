@@ -60,7 +60,7 @@ interface SchoolScheduleDao {
     fun getEtalonTimeSlots(): LiveData<List<TimeSlot>>
 
     @Query("SELECT * FROM subject WHERE subjectId = :key")
-    fun getSubject(key: Long): Subject?
+    fun getSubject(key: Long): LiveData<Subject>
 
     @Query("SELECT * FROM teacher WHERE teacherId = :key")
     fun getTeacher(key: Long): LiveData<Teacher>
@@ -70,6 +70,9 @@ interface SchoolScheduleDao {
 
     @Query("SELECT * FROM teacher ORDER BY teacherId DESC")
     fun getAllTeachers(): LiveData<List<Teacher>>
+
+    @Query("SELECT * FROM teacher ORDER BY teacherId DESC")
+    fun getAllTeachersAsList(): List<Teacher>
 
     @Query("SELECT * FROM time_slot ORDER BY timeslotId DESC")
     fun getAllTimeSlots(): LiveData<List<TimeSlot>>
@@ -114,14 +117,14 @@ interface SchoolScheduleDao {
     @Transaction
     fun fillTimeSlotsInitialData(){
 
-        var startTimeOfLessonHours = 8
+        val startTimeOfLessonHours = 8
         var startTimeOfLessonMins = 0
-        var lengthOfLesson = 40
-        var lengthOfPause = 10
+        val lengthOfLesson = 40
+        val lengthOfPause = 10
 
 
 
-        var timeSlot: TimeSlot = TimeSlot(0
+        val timeSlot = TimeSlot(0
             ,0
             ,0
             ,0
@@ -132,7 +135,7 @@ interface SchoolScheduleDao {
         // fill 6 timeslots for 6 weekdays
         for (weekday in 1..6){
 
-            var timeInMins: Int = startTimeOfLessonHours*60 + startTimeOfLessonMins
+            var timeInMins: Int
 
             for (timeSlotNumber in 1..6){
                 timeSlot.weekDay = weekday
@@ -180,7 +183,7 @@ interface SchoolScheduleDao {
 
     @Transaction
     fun fillSubjectsInitialData(){
-        var subject = Subject()
+        val subject = Subject()
         val res = App.context!!.resources
 
         subject.name = res.getString(R.string.subject1_name)
