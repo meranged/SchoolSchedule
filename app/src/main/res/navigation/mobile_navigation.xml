@@ -99,7 +99,7 @@
     <fragment
         android:id="@+id/subjectDetailsNewFragment"
         android:name="com.meranged.schoolschedule.ui.subjectdetails.SubjectDetailsNewFragment"
-        android:label="SubjectDetailsNewFragment" >
+        android:label="@string/subject_details_new_fragment_title" >
         <action
             android:id="@+id/action_subjectDetailsNewFragment_to_navigation_subjects"
             app:destination="@id/navigation_subjects" />

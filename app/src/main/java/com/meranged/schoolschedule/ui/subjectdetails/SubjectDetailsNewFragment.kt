@@ -10,7 +10,11 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import com.meranged.schoolschedule.App
 
 import com.meranged.schoolschedule.R
 import com.meranged.schoolschedule.database.SchoolScheduleDatabase
@@ -24,8 +28,9 @@ import kotlinx.coroutines.*
 class SubjectDetailsNewFragment :  Fragment()  {
 
 
-    var selectednum: Int = -1
-
+    var teachers_dropdown_list = ArrayList<String>()
+    var teachers_ids = ArrayList<Long>()
+    var selectednum: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,11 +45,19 @@ class SubjectDetailsNewFragment :  Fragment()  {
             inflater,
             R.layout.subject_details_new_fragment, container, false)
 
+        val application = requireNotNull(this.activity).application
+        val arguments = SubjectDetailsFragmentArgs.fromBundle(arguments!!)
 
+        // Create an instance of the ViewModel Factory.
+        val dataSource = SchoolScheduleDatabase.getInstance(application).dao
+        val viewModelFactory = SubjectDetailsNewViewModelFactory(dataSource, application)
+
+        // Get a reference to the ViewModel associated with this fragment.
+        val subjectDetailsNewViewModel =
+            ViewModelProviders.of(
+                this, viewModelFactory).get(SubjectDetailsNewViewModel::class.java)
 
         binding.setLifecycleOwner(this)
-
-
 
         var viewModelJob = Job()
 
@@ -56,7 +69,9 @@ class SubjectDetailsNewFragment :  Fragment()  {
                 var subject = Subject()
                 subject.name = binding.subjectNameEditText.text.toString()
                 subject.roomNumber = binding.subjectRoomNoEditText.text.toString()
-//                subject.teacherId = teachers_list.get(selected_teacher_num).teacherId
+                if (selectednum >0){
+                    subject.teacherId = teachers_ids.get(selectednum)
+                }
 
                 uiScope.launch {
                     insertSubject(subject)
@@ -68,22 +83,32 @@ class SubjectDetailsNewFragment :  Fragment()  {
             }
         }
 
-        fillNickNames()
+        subjectDetailsNewViewModel.teachers_list.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                var l_list = ArrayList<String>()
+                var id_list = ArrayList<Long>()
+                for (t in it){
+                    l_list.add(t.firstName + " " + t.secondName + " " + t.thirdName)
+                    id_list.add(t.teacherId)
+                }
+                teachers_dropdown_list = l_list
+                teachers_ids = id_list
+
+                var adapter= ArrayAdapter(application,android.R.layout.simple_list_item_1,teachers_dropdown_list)
+                binding.subjectTeacherNameEditText.adapter=adapter
+            }
+        })
 
 
-//        val application = requireNotNull(this.activity).application
-//
-//        var adapter= ArrayAdapter(application,android.R.layout.simple_list_item_1,teachers_dropdown_list)
-//        binding.subjectTeacherNameEditText.adapter=adapter
-//
-//        //LISTENER
-//        binding.subjectTeacherNameEditText.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-//            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
-//                selected_teacher_num = i
-//            }
-//            override fun onNothingSelected(adapterView: AdapterView<*>) {
-//            }
-//        }
+
+        //LISTENER
+        binding.subjectTeacherNameEditText.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
+                selectednum = i
+            }
+            override fun onNothingSelected(adapterView: AdapterView<*>) {
+            }
+        }
 
 
 
@@ -97,25 +122,6 @@ class SubjectDetailsNewFragment :  Fragment()  {
         withContext(Dispatchers.IO) {
             dataSource.insert(subject)
         }
-    }
-
-    fun fillNickNames(): ArrayList<String>{
-
-        val application = requireNotNull(this.activity).application
-        val dataSource = SchoolScheduleDatabase.getInstance(application).dao
-
-
-        val teachers_list = dataSource.getAllTeachersAsList()
-        var teachers_dropdown_list = ArrayList<String>()
-
-        var l_teacherNick: String
-
-        for (teacher in teachers_list){
-            l_teacherNick = teacher.firstName + " " + teacher.secondName + " " + teacher.thirdName
-            teachers_dropdown_list.add(l_teacherNick)
-        }
-
-        return teachers_dropdown_list
     }
 
 }
