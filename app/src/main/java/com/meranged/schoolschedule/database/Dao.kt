@@ -122,8 +122,6 @@ interface SchoolScheduleDao {
         val lengthOfLesson = 40
         val lengthOfPause = 10
 
-
-
         val timeSlot = TimeSlot(0
             ,0
             ,0
@@ -231,4 +229,8 @@ interface SchoolScheduleDao {
             fillSubjectsInitialData()
         }
     }
+
+    @Transaction
+    @Query("SELECT * FROM Subject")
+    fun getSubjectsWithTeacher(): LiveData<List<SubjectWithTeacher>>
 }

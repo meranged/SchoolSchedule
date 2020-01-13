@@ -18,6 +18,7 @@ class SubjectsViewModel(
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     val subjects_list = db.getAllSubjects()
+    val subjects_with_teachers_list = db.getSubjectsWithTeacher()
 
     init {
         uiScope.launch {

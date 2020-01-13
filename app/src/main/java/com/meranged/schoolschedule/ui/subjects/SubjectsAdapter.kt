@@ -6,10 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.meranged.schoolschedule.database.Subject
+import com.meranged.schoolschedule.database.SubjectWithTeacher
 import com.meranged.schoolschedule.databinding.ListItemSubjectBinding
 import com.meranged.schoolschedule.databinding.ListItemTimeSlotBinding
 
-class  SubjectsAdapter(val clickListener: SubjectsListener): ListAdapter<Subject, SubjectsAdapter.ViewHolder>(SubjectsDiffCallback()) {
+class  SubjectsAdapter(val clickListener: SubjectsListener): ListAdapter<SubjectWithTeacher, SubjectsAdapter.ViewHolder>(SubjectsDiffCallback()) {
 
     class ViewHolder private constructor (val binding: ListItemSubjectBinding) : RecyclerView.ViewHolder(binding.root){
 
@@ -22,15 +23,21 @@ class  SubjectsAdapter(val clickListener: SubjectsListener): ListAdapter<Subject
             }
         }
 
-        fun bind(item: Subject, clickListener: SubjectsListener) {
+        fun bind(item: SubjectWithTeacher, clickListener: SubjectsListener) {
 
             binding.subject = item
 
+            var s_name: String = ""
+
+            if (!item.teachers.isEmpty()){
+                s_name = item.teachers[0].firstName + " " + item.teachers[0].secondName
+            }
+
             val res = binding.root.context.resources
 
-            binding.subjectName.text = item.name
-            binding.roomNumber.text = item.roomNumber
-            binding.teacherOfSubject.text = item.teacherId.toString()
+            binding.subjectName.text = item.subject.name
+            binding.roomNumber.text = item.subject.roomNumber
+            binding.teacherOfSubject.text = s_name
 
             binding.clickListener = clickListener
         }
@@ -52,21 +59,21 @@ class  SubjectsAdapter(val clickListener: SubjectsListener): ListAdapter<Subject
 
 }
 
-class SubjectsDiffCallback : DiffUtil.ItemCallback<Subject>() {
-    override fun areItemsTheSame(oldItem: Subject, newItem: Subject): Boolean {
-        return oldItem.subjectId == newItem.subjectId
+class SubjectsDiffCallback : DiffUtil.ItemCallback<SubjectWithTeacher>() {
+    override fun areItemsTheSame(oldItem: SubjectWithTeacher, newItem: SubjectWithTeacher): Boolean {
+        return oldItem.subject.subjectId == newItem.subject.subjectId
     }
 
-    override fun areContentsTheSame(oldItem: Subject, newItem: Subject): Boolean {
-        return ((oldItem.name != newItem.name)
-                or (oldItem.roomNumber != newItem.roomNumber)
-                or (oldItem.teacherId != newItem.teacherId))
+    override fun areContentsTheSame(oldItem: SubjectWithTeacher, newItem: SubjectWithTeacher): Boolean {
+        return ((oldItem.subject.name != newItem.subject.name)
+                or (oldItem.subject.roomNumber != newItem.subject.roomNumber)
+                or (oldItem.subject.teacherId != newItem.subject.teacherId))
 
     }
 }
 
-class SubjectsListener(val clickListener: (ts: Subject) -> Unit) {
+class SubjectsListener(val clickListener: (ts: SubjectWithTeacher) -> Unit) {
 
-    fun onClick(subject: Subject) = clickListener(subject)
+    fun onClick(subject: SubjectWithTeacher) = clickListener(subject)
 
 }

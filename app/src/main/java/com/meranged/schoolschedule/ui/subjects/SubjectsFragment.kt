@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.meranged.schoolschedule.R
 import com.meranged.schoolschedule.database.SchoolScheduleDatabase
 import com.meranged.schoolschedule.database.Subject
+import com.meranged.schoolschedule.database.SubjectWithTeacher
 import com.meranged.schoolschedule.database.Teacher
 import com.meranged.schoolschedule.databinding.MyTeachersFragmentBinding
 import com.meranged.schoolschedule.databinding.SubjectsFragmentBinding
@@ -55,7 +56,7 @@ class SubjectsFragment : Fragment() {
 
         binding.subjectsList.adapter = adapter
 
-        viewModel.subjects_list.observe(viewLifecycleOwner, Observer {
+        viewModel.subjects_with_teachers_list.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
             }
@@ -74,12 +75,12 @@ class SubjectsFragment : Fragment() {
         return binding.root
     }
 
-    fun onClickShowDetails(item: Subject) {
+    fun onClickShowDetails(item: SubjectWithTeacher) {
 
         view!!.findNavController()
             .navigate(
                 SubjectsFragmentDirections
-                    .actionNavigationSubjectsToSubjectDetailsFragment(item.subjectId))
+                    .actionNavigationSubjectsToSubjectDetailsFragment(item.subject.subjectId))
     }
 
 }
