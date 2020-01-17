@@ -110,8 +110,6 @@ class SubjectDetailsNewFragment :  Fragment()  {
             }
         }
 
-
-
         return binding.root
     }
 

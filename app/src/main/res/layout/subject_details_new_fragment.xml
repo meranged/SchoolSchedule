@@ -50,6 +50,7 @@
                 android:ems="10"
                 android:hint="@string/subject_teacher_name_title"
                 android:inputType="textPersonName"
+                android:spinnerMode="dropdown"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/subject_room_no_editText" />

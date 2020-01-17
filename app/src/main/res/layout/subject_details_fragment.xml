@@ -33,6 +33,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/room_no_title_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:text="@string/subject_details_roomNo_title"
+                android:textSize="18sp"
+                app:layout_constraintTop_toTopOf="@+id/subject_room_no_editText"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <EditText
                 android:id="@+id/subject_room_no_editText"
                 android:layout_width="0dp"
@@ -41,12 +51,12 @@
                 android:ems="10"
                 android:hint="@string/subject_room_no_title"
                 android:inputType="textPersonName"
-                android:text = "@={subjectDetailsViewModel.subject.roomNumber}"
+                android:text="@={subjectDetailsViewModel.subject.roomNumber}"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/room_no_title_textView"
                 app:layout_constraintTop_toBottomOf="@+id/subject_name_editText" />
 
-            <EditText
+            <androidx.appcompat.widget.AppCompatSpinner
                 android:id="@+id/subject_teacher_name_editText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -54,6 +64,7 @@
                 android:ems="10"
                 android:hint="@string/subject_teacher_name_title"
                 android:inputType="textPersonName"
+                android:spinnerMode="dropdown"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/subject_room_no_editText" />
@@ -77,6 +88,9 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/subject_teacher_name_editText" />
+
+
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

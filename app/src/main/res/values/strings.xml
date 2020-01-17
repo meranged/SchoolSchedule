@@ -46,6 +46,7 @@
     <string name="subject_teacher_name_title">кто ведёт предмет?</string>
     <string name="subject_details_fragment_title">Предмет</string>
     <string name="subject_details_new_fragment_title">Новый предмет</string>
+    <string name="subject_details_roomNo_title">Кабинет:</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

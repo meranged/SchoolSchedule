@@ -6,27 +6,32 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 
 import com.meranged.schoolschedule.R
 import com.meranged.schoolschedule.database.SchoolScheduleDatabase
+import com.meranged.schoolschedule.database.Subject
 import com.meranged.schoolschedule.databinding.SubjectDetailsFragmentBinding
 import com.meranged.schoolschedule.databinding.TeacherDetailsFragmentBinding
 import com.meranged.schoolschedule.ui.teacherdetails.TeacherDetailsFragmentArgs
 import com.meranged.schoolschedule.ui.teacherdetails.TeacherDetailsFragmentDirections
 import com.meranged.schoolschedule.ui.teacherdetails.TeacherDetailsViewModel
 import com.meranged.schoolschedule.ui.teacherdetails.TeacherDetailsViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class SubjectDetailsFragment : Fragment() {
 
     companion object {
         fun newInstance() = SubjectDetailsFragment()
     }
+
+    var teachers_dropdown_list = ArrayList<String>()
+    var teachers_ids = ArrayList<Long>()
+    var selectednum: Int = 0
 
     private lateinit var viewModel: SubjectDetailsViewModel
 
@@ -63,9 +68,53 @@ class SubjectDetailsFragment : Fragment() {
         // give the binding object a reference to it.
         binding.subjectDetailsViewModel = subjectDetailsViewModel
 
+        subjectDetailsViewModel.teachers_list.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                var l_list = ArrayList<String>()
+                var id_list = ArrayList<Long>()
+
+                var teacher_id: Long = -1
+                var initial_position = -1
+
+                var subj:Subject? = subjectDetailsViewModel.getSubject().value
+                if (subj != null){
+                    teacher_id = subj.teacherId
+                }
+
+
+                for (t in it){
+                    l_list.add(t.firstName + " " + t.secondName + " " + t.thirdName)
+                    id_list.add(t.teacherId)
+
+                    if (t.teacherId == teacher_id){
+                        initial_position = l_list.lastIndex
+                    }
+
+                }
+                teachers_dropdown_list = l_list
+                teachers_ids = id_list
+
+                var adapter= ArrayAdapter(application,android.R.layout.simple_list_item_1,teachers_dropdown_list)
+                binding.subjectTeacherNameEditText.adapter=adapter
+                if (initial_position != -1) {
+                    binding.subjectTeacherNameEditText.setSelection(initial_position)
+                }
+            }
+        })
+
+        //LISTENER
+        binding.subjectTeacherNameEditText.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(adapterView: AdapterView<*>, view: View, i: Int, l: Long) {
+                selectednum = i
+            }
+            override fun onNothingSelected(adapterView: AdapterView<*>) {
+            }
+        }
+
+
         binding.saveButton.setOnClickListener{
             uiScope.launch {
-                subjectDetailsViewModel.updateSubject()
+                subjectDetailsViewModel.updateSubject(teachers_ids[selectednum])
             }
             view!!.findNavController()
                 .navigate(
@@ -83,8 +132,6 @@ class SubjectDetailsFragment : Fragment() {
                     SubjectDetailsFragmentDirections
                         .actionSubjectDetailsFragmentToNavigationSubjects())
         }
-
-
 
         return binding.root
     }

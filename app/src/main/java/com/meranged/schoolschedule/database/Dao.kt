@@ -65,10 +65,10 @@ interface SchoolScheduleDao {
     @Query("SELECT * FROM teacher WHERE teacherId = :key")
     fun getTeacher(key: Long): LiveData<Teacher>
 
-    @Query("SELECT * FROM subject ORDER BY subjectId DESC")
+    @Query("SELECT * FROM subject ORDER BY subjectId ASC")
     fun getAllSubjects(): LiveData<List<Subject>>
 
-    @Query("SELECT * FROM teacher ORDER BY teacherId DESC")
+    @Query("SELECT * FROM teacher ORDER BY teacherId ASC")
     fun getAllTeachers(): LiveData<List<Teacher>>
 
     @Query("SELECT * FROM teacher ORDER BY teacherId DESC")
