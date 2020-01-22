@@ -32,7 +32,7 @@ class  SubjectsAdapter(val clickListener: SubjectsListener): ListAdapter<Subject
             var s_name: String = ""
 
             if (!item.teachers.isEmpty()){
-                s_name = item.teachers[0].firstName + " " + item.teachers[0].secondName
+                s_name = item.teachers[0].firstName + " " + item.teachers[0].secondName + " " + item.teachers[0].thirdName
 
                 if (item.teachers[0].photo != null) {
                     val arrayInputStream = ByteArrayInputStream(item.teachers[0].photo)

@@ -19,7 +19,7 @@ class MyTeachersViewModel(
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     val teachers_list = db.getAllTeachers()
-    val teachers_with_subjects = db.getTeacherWithSubjects()
+    val teachers_with_subjects_list = db.getTeacherWithSubjects()
 
     init {
         uiScope.launch {

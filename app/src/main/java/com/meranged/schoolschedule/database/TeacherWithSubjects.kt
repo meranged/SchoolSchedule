@@ -7,7 +7,7 @@ data class TeacherWithSubjects (
     @Embedded val teacher: Teacher,
     @Relation(
         parentColumn = "teacherId",
-        entityColumn = "teacherId"
+        entityColumn = "teacher_id"
     )
     val subjects: List<Subject>
 )

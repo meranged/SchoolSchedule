@@ -68,7 +68,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/time_vertical_padding"
+                android:padding="1dp"
                 android:text="Математика, Русский язык, Литература"
+                android:background="@drawable/rounded_corner2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/teacherImageView2" />
 

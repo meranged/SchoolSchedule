@@ -67,7 +67,7 @@ class MyTeachersFragment : Fragment() {
 
         binding.myTeachersList.adapter = adapter
 
-        viewModel.teachers_list.observe(viewLifecycleOwner, Observer {
+        viewModel.teachers_with_subjects_list.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
             }
