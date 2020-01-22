@@ -1,5 +1,6 @@
 package com.meranged.schoolschedule.ui.myteachers
 
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.meranged.schoolschedule.database.Teacher
 import com.meranged.schoolschedule.databinding.ListItemTeacherBinding
 import com.meranged.schoolschedule.databinding.ListItemTimeSlotBinding
+import java.io.ByteArrayInputStream
 
 class  MyTeachersAdapter(val clickListener: MyTeachersListener): ListAdapter<Teacher, MyTeachersAdapter.ViewHolder>(MyTeachersDiffCallback()) {
 
@@ -30,6 +32,11 @@ class  MyTeachersAdapter(val clickListener: MyTeachersListener): ListAdapter<Tea
 
             binding.teacherFIO.text = item.firstName + " " + item.secondName + " " + item.thirdName
             binding.teacherSubjectsList.text = ""
+
+            if (item.photo != null) {
+                val arrayInputStream = ByteArrayInputStream(item.photo)
+                binding.teacherImageView.setImageBitmap(BitmapFactory.decodeStream(arrayInputStream))
+            }
 
             binding.clickListener = clickListener
         }

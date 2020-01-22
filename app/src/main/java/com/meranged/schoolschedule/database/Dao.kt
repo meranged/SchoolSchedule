@@ -233,4 +233,9 @@ interface SchoolScheduleDao {
     @Transaction
     @Query("SELECT * FROM Subject")
     fun getSubjectsWithTeacher(): LiveData<List<SubjectWithTeacher>>
+
+    @Transaction
+    @Query("SELECT * FROM Teacher")
+    fun getTeacherWithSubjects(): LiveData<List<TeacherWithSubjects>>
+
 }

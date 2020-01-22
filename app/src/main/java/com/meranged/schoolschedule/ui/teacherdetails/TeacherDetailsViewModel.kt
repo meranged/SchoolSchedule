@@ -1,12 +1,14 @@
 package com.meranged.schoolschedule.ui.teacherdetails
 
-import android.util.Log
+import android.R.attr.bitmap
+import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.meranged.schoolschedule.database.SchoolScheduleDao
 import com.meranged.schoolschedule.database.Teacher
 import kotlinx.coroutines.*
+import java.io.ByteArrayOutputStream
+
 
 class TeacherDetailsViewModel(
     teacher_id:  Long = 0L,
@@ -18,9 +20,7 @@ class TeacherDetailsViewModel(
      */
     val db = dataSource
 
-    private var teacher: LiveData<Teacher>
-
-    fun getTeacher() = teacher
+    var teacher: LiveData<Teacher>
 
     private val viewModelJob = Job()
 
@@ -45,6 +45,16 @@ class TeacherDetailsViewModel(
     suspend fun deleteTeacher(){
         withContext(Dispatchers.IO) {
             db.deleteTeacher(teacher.value!!.teacherId)
+        }
+    }
+
+    fun setPicture(p: Bitmap){
+        val stream = ByteArrayOutputStream()
+        p.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+        teacher.value!!.photo = stream.toByteArray()
+
+        uiScope.launch {
+            updateTeacher()
         }
     }
 
