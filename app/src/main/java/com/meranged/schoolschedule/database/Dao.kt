@@ -65,6 +65,10 @@ interface SchoolScheduleDao {
     @Query("SELECT * FROM teacher WHERE teacherId = :key")
     fun getTeacher(key: Long): LiveData<Teacher>
 
+    @Query("SELECT * FROM time_slot WHERE timeslotId = :key")
+    fun getTimeslot(key: Long): LiveData<TimeSlot>
+
+
     @Query("SELECT * FROM subject ORDER BY subjectId ASC")
     fun getAllSubjects(): LiveData<List<Subject>>
 
@@ -118,7 +122,6 @@ interface SchoolScheduleDao {
     fun fillTimeSlotsInitialData(){
 
         val startTimeOfLessonHours = 8
-        var startTimeOfLessonMins = 0
         val lengthOfLesson = 40
         val lengthOfPause = 10
 
@@ -237,5 +240,9 @@ interface SchoolScheduleDao {
     @Transaction
     @Query("SELECT * FROM Teacher")
     fun getTeacherWithSubjects(): LiveData<List<TeacherWithSubjects>>
+
+    @Transaction
+    @Query("SELECT * FROM TIME_SLOT ORDER BY week_day, number ASC")
+    fun getTimeSlotWithSubjects(): LiveData<List<TimeSlotWithSubjects>>
 
 }

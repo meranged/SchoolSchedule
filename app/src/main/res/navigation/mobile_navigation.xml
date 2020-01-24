@@ -13,9 +13,9 @@
         tools:layout="@layout/calls_schedule_fragment" />
     <fragment
         android:id="@+id/navigation_lessons_schedule"
-        android:name="com.meranged.schoolschedule.ui.lessonsschedule.LessonsShceduleFragment"
+        android:name="com.meranged.schoolschedule.ui.lessonsschedule.LessonsScheduleFragment"
         android:label="@string/title_lessons_schedule"
-        tools:layout="@layout/lessons_shcedule_fragment" >
+        tools:layout="@layout/lessons_schedule_fragment" >
         <action
             android:id="@+id/action_navigation_lessons_schedule_to_dayDetailsFragment"
             app:destination="@id/dayDetailsFragment" />
@@ -59,8 +59,8 @@
             android:id="@+id/action_dayDetailsFragment_to_navigation_lessons_schedule"
             app:destination="@id/navigation_lessons_schedule" />
         <argument
-            android:name="day_id"
-            app:argType="integer" />
+            android:name="timeslot_id"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/teacherDetailsFragment"

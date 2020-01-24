@@ -1,12 +1,11 @@
-package com.meranged.schoolschedule.ui.subjects
+package com.meranged.schoolschedule.ui.lessonsschedule
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import com.meranged.schoolschedule.database.SchoolScheduleDao
-import com.meranged.schoolschedule.database.Subject
 import kotlinx.coroutines.*
 
-class SubjectsViewModel(
+class LessonsScheduleViewModel(
     val database: SchoolScheduleDao,
     application: Application
 ) : AndroidViewModel(application) {
@@ -17,18 +16,11 @@ class SubjectsViewModel(
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    val subjects_with_teachers_list = db.getSubjectsWithTeacher()
+    val time_slots_with_subjects = db.getTimeSlotWithSubjects()
+    val teachers_list = db.getAllTeachers()
 
     init {
-        uiScope.launch {
-            fillDPB()
-        }
-    }
 
-    private suspend fun fillDPB() {
-        withContext(Dispatchers.IO) {
-            db.checkAndFillSubjectsList()
-        }
     }
 
     override fun onCleared() {

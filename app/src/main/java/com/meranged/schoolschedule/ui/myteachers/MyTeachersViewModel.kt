@@ -18,7 +18,6 @@ class MyTeachersViewModel(
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
-    val teachers_list = db.getAllTeachers()
     val teachers_with_subjects_list = db.getTeacherWithSubjects()
 
     init {
@@ -30,12 +29,6 @@ class MyTeachersViewModel(
     private suspend fun fillDPB() {
         withContext(Dispatchers.IO) {
             db.checkAndFillTeachersList()
-        }
-    }
-
-    suspend fun updateWeekTimeSlot(teacher: Teacher) {
-        withContext(Dispatchers.IO) {
-            db.update(teacher)
         }
     }
 

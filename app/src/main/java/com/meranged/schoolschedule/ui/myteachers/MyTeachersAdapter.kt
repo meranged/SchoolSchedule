@@ -30,7 +30,7 @@ class  MyTeachersAdapter(val clickListener: MyTeachersListener): ListAdapter<Tea
 
             binding.teacher = item.teacher
 
-            val res = binding.root.context.resources
+            //val res = binding.root.context.resources
 
             binding.teacherFIO.text = item.teacher.firstName + " " + item.teacher.secondName + " " + item.teacher.thirdName
             binding.teacherSubjectsList.text = ""
@@ -40,7 +40,7 @@ class  MyTeachersAdapter(val clickListener: MyTeachersListener): ListAdapter<Tea
                 binding.teacherImageView.setImageBitmap(BitmapFactory.decodeStream(arrayInputStream))
             }
 
-            var l_subjs:String = ""
+            var l_subjs = ""
 
             for(subj in item.subjects){
                 l_subjs = l_subjs + subj.name + ", "
@@ -58,15 +58,10 @@ class  MyTeachersAdapter(val clickListener: MyTeachersListener): ListAdapter<Tea
             binding.clickListener = clickListener
         }
 
-        var fio = binding.teacherFIO
         var subjects = binding.teacherSubjectsList
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding =
-            ListItemTimeSlotBinding.inflate(layoutInflater, parent, false)
         return ViewHolder.from(parent)
     }
 

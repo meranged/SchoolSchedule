@@ -58,7 +58,6 @@ class CallsScheduleFragment : Fragment() {
         binding.setLifecycleOwner(this)
 
         val adapter = CallsScheduleAdapter(CallsScheduleListener { timeslot, ftype ->
-            //Toast.makeText(context, "${timeslotId} + ${ftype}", Toast.LENGTH_LONG).show()
             onClickShowTimePicker(timeslot, ftype)
         })
 
@@ -79,8 +78,8 @@ class CallsScheduleFragment : Fragment() {
     fun onClickShowTimePicker(item: TimeSlot, fieldtype: Int) {
 
 
-        var hour = 0
-        var min = 0
+        var hour: Int
+        var min: Int
 
         if (fieldtype == 1) {
             hour = item.startTimeHours
@@ -108,7 +107,7 @@ class CallsScheduleFragment : Fragment() {
     }
 
     fun uts(item: TimeSlot) {
-        var viewModelJob = Job()
+        val viewModelJob = Job()
 
         val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 

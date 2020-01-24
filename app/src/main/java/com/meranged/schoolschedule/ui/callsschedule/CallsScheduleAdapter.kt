@@ -37,17 +37,9 @@ class  CallsScheduleAdapter(val clickListener: CallsScheduleListener): ListAdapt
             binding.clickListener = clickListener
         }
 
-
-        var lesson_title = binding.lessonTitle
-        var lesson_start = binding.lessonStart
-        var lesson_finish = binding.lessonFinish
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding =
-            ListItemTimeSlotBinding.inflate(layoutInflater, parent, false)
         return ViewHolder.from(parent)
     }
 
