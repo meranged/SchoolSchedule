@@ -4,6 +4,7 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -11,12 +12,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import com.meranged.schoolschedule.R
 import com.meranged.schoolschedule.database.SchoolScheduleDatabase
 import com.meranged.schoolschedule.databinding.TeacherDetailsFragmentBinding
 import kotlinx.coroutines.CoroutineScope
@@ -24,6 +25,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import java.io.ByteArrayInputStream
+import com.meranged.schoolschedule.R
 
 
 class TeacherDetailsFragment : Fragment() {
@@ -34,6 +36,7 @@ class TeacherDetailsFragment : Fragment() {
 
     private lateinit var teacherDetailsViewModel: TeacherDetailsViewModel
     val REQUEST_IMAGE_CAPTURE = 1
+    val REQUEST_IMAGE_GALLERY = 2
     lateinit var l_imageView: ImageView
 
     override fun onCreateView(
@@ -90,7 +93,21 @@ class TeacherDetailsFragment : Fragment() {
 
 
         binding.imageView.setOnClickListener{
-            dispatchTakePictureIntent()
+
+
+            val builder = AlertDialog.Builder(activity!!)
+            builder.setTitle(R.string.dialog_option_get_photo_title)
+
+            builder.setPositiveButton(R.string.dialog_option_get_photo_from_camera) { dialog, which ->
+                getPictureFromCamera()
+            }
+
+            builder.setNegativeButton(R.string.dialog_option_get_photo_from_gallery) { dialog, which ->
+                getPictureFromGallery()
+            }
+
+            builder.show()
+
         }
 
 
@@ -108,15 +125,7 @@ class TeacherDetailsFragment : Fragment() {
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-     //   teacherDetailsViewModel = ViewModelProviders.of(this).get(TeacherDetailsViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
-
-
-    private fun dispatchTakePictureIntent() {
+    private fun getPictureFromCamera() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(context!!.packageManager)?.also {
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
@@ -124,11 +133,53 @@ class TeacherDetailsFragment : Fragment() {
         }
     }
 
+    private fun getPictureFromGallery(){
+
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, REQUEST_IMAGE_GALLERY)
+
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             val imageBitmap = data!!.extras.get("data") as Bitmap
-            teacherDetailsViewModel.setPicture(imageBitmap)
+            teacherDetailsViewModel.setPicture(resizeBitmap(imageBitmap, 800))
 
+        }
+
+        if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == RESULT_OK) {
+            val selectedImage: Uri = data!!.data
+            val bitmap = MediaStore.Images.Media.getBitmap(activity!!.applicationContext.contentResolver, selectedImage);
+            teacherDetailsViewModel.setPicture(resizeBitmap(bitmap, 800))
+        }
+
+    }
+
+    fun resizeBitmap(source: Bitmap, maxLength: Int): Bitmap {
+        try {
+            if (source.height >= source.width) {
+                if (source.height <= maxLength) { // if image height already smaller than the required height
+                    return source
+                }
+
+                val aspectRatio = source.width.toDouble() / source.height.toDouble()
+                val targetWidth = (maxLength * aspectRatio).toInt()
+                val result = Bitmap.createScaledBitmap(source, targetWidth, maxLength, false)
+                return result
+            } else {
+                if (source.width <= maxLength) { // if image width already smaller than the required width
+                    return source
+                }
+
+                val aspectRatio = source.height.toDouble() / source.width.toDouble()
+                val targetHeight = (maxLength * aspectRatio).toInt()
+
+                val result = Bitmap.createScaledBitmap(source, maxLength, targetHeight, false)
+                return result
+            }
+        } catch (e: Exception) {
+            return source
         }
     }
 

@@ -245,4 +245,8 @@ interface SchoolScheduleDao {
     @Query("SELECT * FROM TIME_SLOT ORDER BY week_day, number ASC")
     fun getTimeSlotWithSubjects(): LiveData<List<TimeSlotWithSubjects>>
 
+    @Transaction
+    @Query("UPDATE teacher SET photo = null")
+    fun deleteTeachersPhotos()
+
 }

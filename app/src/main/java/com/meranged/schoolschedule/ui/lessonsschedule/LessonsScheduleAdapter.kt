@@ -4,22 +4,20 @@ import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.meranged.schoolschedule.App
+import com.meranged.schoolschedule.R
 import com.meranged.schoolschedule.convertIntTo00
-import com.meranged.schoolschedule.database.SchoolScheduleDatabase
 import com.meranged.schoolschedule.database.Teacher
 import com.meranged.schoolschedule.database.TimeSlotWithSubjects
-import com.meranged.schoolschedule.databinding.ListItemTimeSlotWithSubjectBinding
+import com.meranged.schoolschedule.databinding.ListItemTimeSlotWithSubjectAndWeekdayBinding
 import java.io.ByteArrayInputStream
 
 class  LessonsScheduleAdapter(val clickListener: LessonsScheduleListener): ListAdapter<TimeSlotWithSubjects, LessonsScheduleAdapter.ViewHolder>(SubjectsDiffCallback()) {
 
 
-    class ViewHolder private constructor (val binding: ListItemTimeSlotWithSubjectBinding) : RecyclerView.ViewHolder(binding.root){
+    class ViewHolder private constructor (val binding: ListItemTimeSlotWithSubjectAndWeekdayBinding) : RecyclerView.ViewHolder(binding.root){
 
         companion object {
 
@@ -28,7 +26,7 @@ class  LessonsScheduleAdapter(val clickListener: LessonsScheduleListener): ListA
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding =
-                    ListItemTimeSlotWithSubjectBinding.inflate(layoutInflater, parent, false)
+                    ListItemTimeSlotWithSubjectAndWeekdayBinding.inflate(layoutInflater, parent, false)
                 return ViewHolder(binding)
             }
 
@@ -48,15 +46,26 @@ class  LessonsScheduleAdapter(val clickListener: LessonsScheduleListener): ListA
 
         fun bind(item: TimeSlotWithSubjects, clickListener: LessonsScheduleListener) {
 
-            //val res = binding.root.context.resources
+            val res = binding.root.context.resources
             binding.timeslotwithsubjects = item
             binding.clickListener = clickListener
+
+            binding.teacherName.text = ""
+
+            if (item.timeSlot.number == 1){
+                binding.weekDayName.text = res.getStringArray(R.array.weekdays_array)[item.timeSlot.weekDay-1]
+                binding.weekdayNameCard.visibility = View.VISIBLE
+            } else {
+                binding.weekdayNameCard.visibility = View.GONE
+            }
+
 
             if (!item.subjects.isEmpty()){
                 binding.subjectName.text = item.subjects[0].name
                 binding.roomNumber.text = item.subjects[0].roomNumber
                 binding.subjectName.visibility = View.VISIBLE
                 binding.roomNumber.visibility = View.VISIBLE
+                binding.teacherImageCard.visibility = View.VISIBLE
 
                 if (item.subjects[0].teacherId > 0){
 
@@ -76,6 +85,7 @@ class  LessonsScheduleAdapter(val clickListener: LessonsScheduleListener): ListA
             } else {
                 binding.subjectName.visibility = View.INVISIBLE
                 binding.roomNumber.visibility = View.INVISIBLE
+                binding.teacherImageCard.visibility = View.INVISIBLE
             }
 
             binding.lessonStart.text = "${convertIntTo00(item.timeSlot.startTimeHours)}:${convertIntTo00(item.timeSlot.startTimeMinutes)}"
