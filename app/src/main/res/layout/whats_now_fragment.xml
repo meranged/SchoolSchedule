@@ -21,7 +21,7 @@
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/weekdayNameCard"
+                android:id="@+id/whatsNowTitleCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/time_card_distance"
@@ -40,7 +40,7 @@
                     android:textSize="@dimen/lessons_schedule_subject_name_text_size"
                     app:layout_constraintBottom_toBottomOf="@+id/teacherImageCard"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="Сейчас идёт:" />
+                    android:text="Сейчас идёт:" />
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
