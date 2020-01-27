@@ -1,6 +1,5 @@
 package com.meranged.schoolschedule.ui.teacherdetails
 
-import android.R.attr.bitmap
 import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

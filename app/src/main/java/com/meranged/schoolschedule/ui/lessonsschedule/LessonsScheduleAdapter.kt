@@ -21,7 +21,11 @@ class  LessonsScheduleAdapter(val clickListener: LessonsScheduleListener): ListA
 
         companion object {
 
-            lateinit var t_list: List<Teacher>
+            var t_list: List<Teacher>
+
+            init {
+                t_list = emptyList()
+            }
 
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
