@@ -1,6 +1,7 @@
 package com.meranged.schoolschedule.ui.whatsnow
 
 import android.os.CountDownTimer
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -39,26 +40,27 @@ class WhatsNowViewModel(
     val teachers_list = db.getAllTeachers()
     var t_list = emptyList<Teacher>()
     var now_status = UNKNOWN
-    var timeToCallCounter:Long = 0
+    var timeToCall: Long = 0
 
-    var currentLesson:TimeSlotWithSubjects? = null
-    var nextLesson:TimeSlotWithSubjects? = null
+    var currentLesson: TimeSlotWithSubjects? = null
+    var nextLesson: TimeSlotWithSubjects? = null
 
     private var _needToChangeState = MutableLiveData<Int>()
 
     val needToChangeState: LiveData<Int>
         get() = _needToChangeState
 
-    private var _now_time = MutableLiveData<Date>()
+    private var _timeToCallCounter = MutableLiveData<Long>()
 
-    val now_time: LiveData<Date>
-        get() = _now_time
+    val timeToCallCounter: LiveData<Long>
+        get() = _timeToCallCounter
+
+    var timer: CountDownTimer? = null
 
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     init {
         _needToChangeState.value = 0
-        _now_time.value = Calendar.getInstance().time
     }
 
     /** Coroutine setup variables */
@@ -72,24 +74,41 @@ class WhatsNowViewModel(
         viewModelJob.cancel()
     }
 
-    fun setTimer(timeToCall: Long){
+    fun setTimer(timetc: Long) {
 
-        timeToCallCounter = timeToCall
+        timeToCall = timetc
+        _timeToCallCounter.value = timetc
 
-        object : CountDownTimer(timeToCall, 1000) {
+        if (timer != null) {
+            timer!!.cancel()
+        }
+
+        timer = object : CountDownTimer(timeToCall, 60000) {
             override fun onTick(millisUntilFinished: Long) {
-                timeToCallCounter = millisUntilFinished
-                _now_time.value = Calendar.getInstance().time
+                _timeToCallCounter.value = millisUntilFinished
+                timeToCall = millisUntilFinished
+                Log.i(
+                    "SS_LOG",
+                    "setTimer1, _needToChangeState.value = " + _needToChangeState.value.toString()
+                )
+                Log.i("SS_LOG", "setTimer, ttc = " + _timeToCallCounter.value.toString())
             }
 
             override fun onFinish() {
                 _needToChangeState.value = _needToChangeState.value!! + 1
+                timeToCall = 0
+                _timeToCallCounter.value = 0
+                Log.i(
+                    "SS_LOG",
+                    "setTimer2, _needToChangeState.value = " + _needToChangeState.value.toString()
+                )
+                Log.i("SS_LOG", "setTimer, ttc = " + _timeToCallCounter.value.toString())
             }
         }.start()
     }
 
-    fun getTeacherOfSubject(subject: Subject):Teacher?{
-        for (teacher in t_list){
+    fun getTeacherOfSubject(subject: Subject): Teacher? {
+        for (teacher in t_list) {
             if (subject.teacherId == teacher.teacherId)
                 return teacher
         }

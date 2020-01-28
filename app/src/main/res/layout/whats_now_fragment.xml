@@ -40,7 +40,7 @@
                     android:textSize="@dimen/lessons_schedule_subject_name_text_size"
                     app:layout_constraintBottom_toBottomOf="@+id/teacherImageCard"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:text="Сейчас идёт:" />
+                    android:text="Сейчас идёт" />
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -183,7 +183,7 @@
                     android:textSize="@dimen/lessons_schedule_subject_name_text_size"
                     app:layout_constraintBottom_toBottomOf="@+id/teacherImageCard"
                     app:layout_constraintStart_toStartOf="parent"
-                    tools:text="До звонка осталось:" />
+                    android:text="До звонка осталось:" />
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:id="@+id/timeToCallCard"
@@ -212,17 +212,17 @@
                 app:cardElevation="@dimen/time_card_elevation"
                 app:contentPadding="@dimen/time_card_content_padding">
 
-            <TextView
-                android:id="@+id/whatsNextTitleTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/time_vertical_padding"
-                android:background="@color/colorPrimary"
-                android:gravity="center"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/lessons_schedule_subject_name_text_size"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:text="Будет:" />
+                <TextView
+                    android:id="@+id/whatsNextTitleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/time_vertical_padding"
+                    android:background="@color/colorPrimary"
+                    android:gravity="center"
+                    android:text="Потом"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/lessons_schedule_subject_name_text_size"
+                    app:layout_constraintStart_toStartOf="parent" />
             </androidx.cardview.widget.CardView>
             <androidx.cardview.widget.CardView
                 android:id="@+id/subjectCardView2"
