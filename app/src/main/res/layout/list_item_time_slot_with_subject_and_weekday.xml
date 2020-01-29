@@ -26,18 +26,18 @@
             android:layout_margin="@dimen/time_card_distance"
             android:background="@color/colorPrimary"
             app:cardCornerRadius="@dimen/time_card_radius"
-            app:cardElevation="@dimen/time_card_elevation"
-            app:contentPadding="@dimen/time_card_content_padding">
+            app:cardElevation="@dimen/time_card_elevation">
 
             <TextView
                 android:id="@+id/weekDayName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/time_vertical_padding"
-                android:background="@color/colorPrimary"
+                android:background="@color/colorPrimaryDark"
                 android:gravity="center"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/lessons_schedule_subject_name_text_size"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/teacherImageCard"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:text="Понедельник" />
@@ -50,8 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/time_card_distance"
             app:cardCornerRadius="@dimen/time_card_radius"
-            app:cardElevation="@dimen/time_card_elevation"
-            app:contentPadding="@dimen/time_card_content_padding">
+            app:cardElevation="@dimen/time_card_elevation">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -59,44 +58,46 @@
                 android:onClick="@{() -> clickListener.onClick(timeslotwithsubjects)}">
 
                 <TextView
-                    android:id="@+id/subjectName"
+                    android:id="@+id/lesson_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/time_vertical_padding"
-                    android:text="@string/subject1_name"
-                    android:textSize="@dimen/lessons_schedule_subject_name_text_size"
-                    app:layout_constraintBottom_toBottomOf="@+id/teacherImageCard"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    android:layout_marginStart="10dp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="5" />
 
-                <TextView
-                    android:id="@+id/teacherName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/time_vertical_padding"
-                    android:textSize="@dimen/lessons_schedule_subject_name_text_size"
-                    app:layout_constraintBottom_toBottomOf="@+id/teacherImageCard"
-                    app:layout_constraintEnd_toStartOf="@+id/teacherImageCard"
-                    tools:text="Хотовицкая" />
+                <View
+                    android:id="@+id/divider4"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="10dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/lesson_number"
+                    app:layout_constraintTop_toTopOf="parent" />
+
 
                 <TextView
                     android:id="@+id/lesson_start"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/time_horizontal_padding"
                     android:background="@color/colorPrimary"
                     android:padding="1dp"
                     android:text="08:00"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/lessons_schedule_subject_name_text_size"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/divider4"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/lesson_finish"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/time_horizontal_padding"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
                     android:background="@color/colorPrimary"
                     android:padding="1dp"
                     android:text="08:40"
@@ -110,40 +111,69 @@
                     android:id="@+id/roomNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/time_horizontal_padding"
-                    android:background="@drawable/rounded_corner"
-                    android:padding="1dp"
-                    android:text="@string/subject_place1"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:textColor="@android:color/white"
+                    android:layout_margin="1dp"
                     android:textSize="@dimen/lessons_schedule_subject_name_text_size"
+                    app:layout_constraintEnd_toStartOf="@id/divider3"
+                    app:layout_constraintStart_toStartOf="@+id/divider4"
+                    app:layout_constraintTop_toBottomOf="@+id/lesson_start"
+                    tools:text="203" />
+
+                <ImageView
+                    android:id="@+id/teacherImageView"
+                    android:layout_width="@dimen/teacher_image_size_small2"
+                    android:layout_height="@dimen/teacher_image_size_small2"
+                    android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_face_black_24dp" />
+
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/lesson_finish"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/teacherImageCard"
-                    android:layout_width="@dimen/teacher_image_size_small3"
-                    android:layout_height="@dimen/teacher_image_size_small3"
-                    android:layout_margin="@dimen/time_horizontal_padding"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/roomNumber">
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider"
+                    app:layout_constraintEnd_toStartOf="@id/teacherImageView"
+                    app:layout_constraintStart_toEndOf="@+id/divider4"
+                    app:layout_constraintTop_toBottomOf="@id/lesson_start" />
 
-                    <ImageView
-                        android:id="@+id/teacherImageView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_face_black_24dp" />
 
-                </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/subjectName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:text="@string/subject1_name"
+                    android:textSize="@dimen/lessons_schedule_subject_name_text_size"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/teacherImageView"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/divider3"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/teacherName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:textSize="@dimen/lessons_schedule_subject_name_text_size"
+                    app:layout_constraintEnd_toStartOf="@+id/teacherImageView"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/divider3"
+                    app:layout_constraintTop_toTopOf="@id/divider2"
+                    tools:text="Хотовицкая" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         </androidx.cardview.widget.CardView>
     </androidx.appcompat.widget.LinearLayoutCompat>

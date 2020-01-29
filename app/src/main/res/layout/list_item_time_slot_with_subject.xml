@@ -30,20 +30,21 @@
                 android:id="@+id/subjectName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/time_horizontal_padding"
                 android:text="@string/subject1_name"
-                android:layout_marginLeft="@dimen/time_vertical_padding"
                 android:textSize="@dimen/lessons_schedule_subject_name_text_size"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="@+id/teacherImageCard" />
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/teacherImageView"
+                app:layout_constraintTop_toTopOf="parent" />
             <TextView
                 android:id="@+id/teacherName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/time_vertical_padding"
+                android:layout_margin="@dimen/time_horizontal_padding"
                 android:textSize="@dimen/lessons_schedule_subject_name_text_size"
                 tools:text = "Хотовицкая"
-                app:layout_constraintEnd_toStartOf="@+id/teacherImageCard"
-                app:layout_constraintBottom_toBottomOf="@+id/teacherImageCard"  />
+                app:layout_constraintEnd_toStartOf="@+id/teacherImageView"
+                app:layout_constraintTop_toTopOf="@id/divider2"  />
 
             <TextView
                 android:id="@+id/lesson_start"
@@ -80,33 +81,38 @@
                 android:layout_margin="@dimen/time_horizontal_padding"
                 android:text="@string/subject_place1"
                 android:textSize="@dimen/lessons_schedule_subject_name_text_size"
-                android:background="@drawable/rounded_corner"
                 android:padding="1dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-            <androidx.cardview.widget.CardView
-                android:id="@+id/teacherImageCard"
-                android:layout_width="@dimen/teacher_image_size_small3"
-                android:layout_height="@dimen/teacher_image_size_small3"
-                android:layout_margin="@dimen/time_horizontal_padding"
-                app:layout_constraintTop_toBottomOf="@+id/roomNumber"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:cardElevation="10dp"
-                app:cardCornerRadius="20dp">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/divider3"
+                app:layout_constraintTop_toBottomOf="@+id/lesson_start"/>
 
                 <ImageView
                     android:id="@+id/teacherImageView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="@dimen/teacher_image_size_small"
+                    android:layout_height="@dimen/teacher_image_size_small"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/ic_face_black_24dp" />
 
-            </androidx.cardview.widget.CardView>
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintTop_toBottomOf="@id/lesson_start"
+                app:layout_constraintEnd_toStartOf="@id/teacherImageView"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintStart_toEndOf="@id/lesson_finish"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

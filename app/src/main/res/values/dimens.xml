@@ -8,14 +8,14 @@
     <dimen name="time_card_radius">5dp</dimen>
     <dimen name="time_card_distance">2dp</dimen>
     <dimen name="time_card_content_padding">5dp</dimen>
-    <dimen name="time_card_text_size">18sp</dimen>
-    <dimen name="teacher_image_size_small">60dp</dimen>
-    <dimen name="teacher_image_size_small2">50dp</dimen>
+    <dimen name="time_card_text_size">14sp</dimen>
+    <dimen name="teacher_image_size_small">50dp</dimen>
+    <dimen name="teacher_image_size_small2">40dp</dimen>
     <dimen name="teacher_image_size_small3">30dp</dimen>
     <dimen name="teacher_name_height">40dp</dimen>
-    <dimen name="teacher_name_text_size">18sp</dimen>
+    <dimen name="teacher_name_text_size">12sp</dimen>
     <dimen name="teacher_details_text_size">22sp</dimen>
-    <dimen name="subject_name_text_size">24sp</dimen>
+    <dimen name="subject_name_text_size">20sp</dimen>
     <dimen name="subject_teacher_text_size">18sp</dimen>
-    <dimen name="lessons_schedule_subject_name_text_size">16sp</dimen>
+    <dimen name="lessons_schedule_subject_name_text_size">12sp</dimen>
 </resources>
