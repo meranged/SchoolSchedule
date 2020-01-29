@@ -45,7 +45,7 @@ class DayDetailsFragment : Fragment() {
 
         // Create an instance of the ViewModel Factory.
         val dataSource = SchoolScheduleDatabase.getInstance(application).dao
-        val viewModelFactory = DayDetailsViewModelFactory(arguments!!.timeslotId, dataSource)
+        val viewModelFactory = DayDetailsViewModelFactory(arguments.timeslotId, dataSource)
 
         // Get a reference to the ViewModel associated with this fragment.
         val dayDetailsViewModel =
@@ -115,6 +115,16 @@ class DayDetailsFragment : Fragment() {
         binding.saveButton.setOnClickListener{
             uiScope.launch {
                 dayDetailsViewModel.updateTimeSlot(subjects_ids[selectednum])
+            }
+            view!!.findNavController()
+                .navigate(
+                    DayDetailsFragmentDirections
+                        .actionDayDetailsFragmentToNavigationLessonsSchedule())
+        }
+
+        binding.deleteButton.setOnClickListener{
+            uiScope.launch {
+                dayDetailsViewModel.clearTimeSlot()
             }
             view!!.findNavController()
                 .navigate(

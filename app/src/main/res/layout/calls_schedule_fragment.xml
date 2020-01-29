@@ -9,423 +9,49 @@
             type="com.meranged.schoolschedule.ui.callsschedule.CallsScheduleViewModel"/>
     </data>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"
+        android:layout_height="match_parent">
 
-        android:id="@+id/slots_list">
-
-
-    </androidx.recyclerview.widget.RecyclerView>
-    <!--
-    <ScrollView
-        android:id="@+id/lessonsScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbarStyle="insideOverlay"
-        tools:context=".ui.callsschedule.CallsScheduleFragment">
-
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/slots_list"
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:scrollbars="vertical">
+
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_minus"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_gravity="center|bottom"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="@string/fab1_hint"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/fab_plus"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/slots_list"
+            app:srcCompat="@drawable/ic_remove_black_24dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="@string/fab1_hint"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/slots_list"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/fab_minus"
+            app:srcCompat="@drawable/ic_add_black_24dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/Lesson1CardView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/time_card_distance"
-                app:cardCornerRadius="@dimen/time_card_radius"
-                app:cardElevation="@dimen/time_card_elevation"
-                app:contentPadding="@dimen/time_card_content_padding">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/Lesson1Title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/time_horizontal_padding"
-
-                        android:text="@string/title_1_lesson"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textSize="@dimen/time_card_text_size"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                    <TextView
-                        android:id="@+id/startOfLesson1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/time_horizontal_padding"
-                        android:background="@color/colorPrimary"
-                        android:padding="@dimen/time_horizontal_padding"
-                        android:text="08:00"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/time_card_text_size"
-                        app:layout_constraintEnd_toStartOf="@+id/finishOfLesson1"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/Lesson1Title" />
-
-                    <TextView
-                        android:id="@+id/finishOfLesson1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/time_horizontal_padding"
-                        android:background="@color/colorPrimary"
-                        android:padding="@dimen/time_horizontal_padding"
-                        android:text="08:40"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/time_card_text_size"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/startOfLesson1"
-                        app:layout_constraintTop_toBottomOf="@id/Lesson1Title" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/Lesson2CardView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/time_card_distance"
-                app:cardCornerRadius="@dimen/time_card_radius"
-                app:cardElevation="@dimen/time_card_elevation"
-                app:contentPadding="@dimen/time_card_content_padding">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/Lesson2Title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/time_horizontal_padding"
-
-                        android:text="@string/title_2_lesson"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textSize="@dimen/time_card_text_size"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                    <TextView
-                        android:id="@+id/startOfLesson2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/time_horizontal_padding"
-                        android:background="@color/colorPrimary"
-
-                        android:padding="@dimen/time_horizontal_padding"
-                        android:text="08:00"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/time_card_text_size"
-                        app:layout_constraintEnd_toStartOf="@+id/finishOfLesson2"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/Lesson2Title" />
-
-                    <TextView
-                        android:id="@+id/finishOfLesson2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/time_horizontal_padding"
-                        android:background="@color/colorPrimary"
-
-                        android:padding="@dimen/time_horizontal_padding"
-                        android:text="08:40"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/time_card_text_size"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/startOfLesson2"
-                        app:layout_constraintTop_toBottomOf="@id/Lesson2Title" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/Lesson3CardView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/time_card_distance"
-                app:cardCornerRadius="@dimen/time_card_radius"
-                app:cardElevation="@dimen/time_card_elevation"
-                app:contentPadding="@dimen/time_card_content_padding">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/Lesson3Title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/time_horizontal_padding"
-
-                        android:text="@string/title_3_lesson"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textSize="@dimen/time_card_text_size"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                    <TextView
-                        android:id="@+id/startOfLesson3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/time_horizontal_padding"
-                        android:background="@color/colorPrimary"
-
-                        android:padding="@dimen/time_horizontal_padding"
-                        android:text="08:00"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/time_card_text_size"
-                        app:layout_constraintEnd_toStartOf="@+id/finishOfLesson3"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/Lesson3Title" />
-
-                    <TextView
-                        android:id="@+id/finishOfLesson3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/time_horizontal_padding"
-                        android:background="@color/colorPrimary"
-
-                        android:padding="@dimen/time_horizontal_padding"
-                        android:text="08:40"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/time_card_text_size"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/startOfLesson3"
-                        app:layout_constraintTop_toBottomOf="@id/Lesson3Title" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/Lesson4CardView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/time_card_distance"
-                app:cardCornerRadius="@dimen/time_card_radius"
-                app:cardElevation="@dimen/time_card_elevation"
-                app:contentPadding="@dimen/time_card_content_padding">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/Lesson4Title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/time_horizontal_padding"
-
-                        android:text="@string/title_4_lesson"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textSize="@dimen/time_card_text_size"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                    <TextView
-                        android:id="@+id/startOfLesson4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/time_horizontal_padding"
-                        android:background="@color/colorPrimary"
-
-                        android:padding="@dimen/time_horizontal_padding"
-                        android:text="08:00"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/time_card_text_size"
-                        app:layout_constraintEnd_toStartOf="@+id/finishOfLesson4"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/Lesson4Title" />
-
-                    <TextView
-                        android:id="@+id/finishOfLesson4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/time_horizontal_padding"
-                        android:background="@color/colorPrimary"
-
-                        android:padding="@dimen/time_horizontal_padding"
-                        android:text="08:40"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/time_card_text_size"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/startOfLesson4"
-                        app:layout_constraintTop_toBottomOf="@id/Lesson4Title" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/Lesson5CardView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/time_card_distance"
-                app:cardCornerRadius="@dimen/time_card_radius"
-                app:cardElevation="@dimen/time_card_elevation"
-                app:contentPadding="@dimen/time_card_content_padding">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/Lesson5Title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/time_horizontal_padding"
-
-                        android:text="@string/title_5_lesson"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textSize="@dimen/time_card_text_size"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                    <TextView
-                        android:id="@+id/startOfLesson5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/time_horizontal_padding"
-                        android:background="@color/colorPrimary"
-
-                        android:padding="@dimen/time_horizontal_padding"
-                        android:text="08:00"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/time_card_text_size"
-                        app:layout_constraintEnd_toStartOf="@+id/finishOfLesson5"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/Lesson5Title" />
-
-                    <TextView
-                        android:id="@+id/finishOfLesson5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/time_horizontal_padding"
-                        android:background="@color/colorPrimary"
-
-                        android:padding="@dimen/time_horizontal_padding"
-                        android:text="08:40"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/time_card_text_size"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/startOfLesson5"
-                        app:layout_constraintTop_toBottomOf="@id/Lesson5Title" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/Lesson6CardView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/time_card_distance"
-                app:cardCornerRadius="@dimen/time_card_radius"
-                app:cardElevation="@dimen/time_card_elevation"
-                app:contentPadding="@dimen/time_card_content_padding">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/Lesson6Title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/time_horizontal_padding"
-
-                        android:text="@string/title_6_lesson"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textSize="@dimen/time_card_text_size"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                    <TextView
-                        android:id="@+id/startOfLesson6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/time_horizontal_padding"
-                        android:background="@color/colorPrimary"
-
-                        android:padding="@dimen/time_horizontal_padding"
-                        android:text="08:00"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/time_card_text_size"
-                        app:layout_constraintEnd_toStartOf="@+id/finishOfLesson6"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/Lesson6Title" />
-
-                    <TextView
-                        android:id="@+id/finishOfLesson6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/time_horizontal_padding"
-                        android:background="@color/colorPrimary"
-
-                        android:padding="@dimen/time_horizontal_padding"
-                        android:text="08:40"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/time_card_text_size"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/startOfLesson6"
-                        app:layout_constraintTop_toBottomOf="@id/Lesson6Title" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </androidx.cardview.widget.CardView>
-        </LinearLayout>
-    </ScrollView> -->
 </layout>

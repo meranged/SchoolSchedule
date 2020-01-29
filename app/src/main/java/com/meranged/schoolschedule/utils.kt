@@ -27,6 +27,13 @@ fun convertIntTo00(intValue: Int): String{
     return ls
 }
 
+fun getRightDayNumber(wrongDay:Int):Int{
+    if (wrongDay == 1)
+        return 7
+    else
+        return wrongDay -1
+}
+
 class ScrollAwareFABBehavior (val recyclerView: RecyclerView, val floatingActionButton: FloatingActionButton) {
 
     fun start() {

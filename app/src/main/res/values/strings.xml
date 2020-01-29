@@ -65,4 +65,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fab1_hint">Добавить</string>
+    <string name="now_is_going">Сейчас идёт</string>
+    <string name="time_to_call_text">До звонка осталось:</string>
+    <string name="after_that_text">Потом</string>
 </resources>

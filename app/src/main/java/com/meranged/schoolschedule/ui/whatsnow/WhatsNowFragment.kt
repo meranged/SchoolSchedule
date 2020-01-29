@@ -16,6 +16,7 @@ import com.meranged.schoolschedule.database.SchoolScheduleDatabase
 import com.meranged.schoolschedule.database.Teacher
 import com.meranged.schoolschedule.database.TimeSlotWithSubjects
 import com.meranged.schoolschedule.databinding.WhatsNowFragmentBinding
+import com.meranged.schoolschedule.getRightDayNumber
 import java.io.ByteArrayInputStream
 import java.util.*
 import java.util.Calendar.*
@@ -107,7 +108,7 @@ class WhatsNowFragment : Fragment() {
         val calendar = getCalendar()
         val curHour = calendar.get(HOUR_OF_DAY)
         val curMin = calendar.get(MINUTE)
-        val weekDay = calendar.get(DAY_OF_WEEK)
+        val weekDay = getRightDayNumber(calendar.get(DAY_OF_WEEK))
 
         Log.i("SS_LOG", "calculateNextState")
 
@@ -247,7 +248,7 @@ class WhatsNowFragment : Fragment() {
         whatsNowViewModel.now_status = whatsNowViewModel.FREE_TIME
         whatsNowViewModel.currentLesson = null
         val nextLesson = getNextLesson(
-            calendar.get(DAY_OF_WEEK), calendar.get(
+            getRightDayNumber(calendar.get(DAY_OF_WEEK)), calendar.get(
                 HOUR_OF_DAY
             ), calendar.get(MINUTE)
         )
@@ -375,6 +376,10 @@ class WhatsNowFragment : Fragment() {
         whatsNowBinding.timeToCallTitleCard.visibility = View.GONE
         whatsNowBinding.whatsNextTitleCard.visibility = View.GONE
         whatsNowBinding.whatsNowTitleCard.visibility = View.GONE
+        whatsNowBinding.weekdayNameCard2.visibility = View.GONE
+
+        whatsNowBinding.weekDayName.text = whatsNowBinding.root.context.resources.getStringArray(R.array.weekdays_array)[getRightDayNumber(Calendar.getInstance().get(
+            DAY_OF_WEEK))-1]
 
         when (whatsNowViewModel.now_status) {
             whatsNowViewModel.UNKNOWN -> {
@@ -385,8 +390,7 @@ class WhatsNowFragment : Fragment() {
                 whatsNowBinding.freeTimeTextView.text = "Доброе утро! Не опоздай в школу!"
                 whatsNowBinding.timeToCallTitleCard.visibility = View.VISIBLE
                 whatsNowBinding.timeToCallCard.visibility = View.VISIBLE
-                whatsNowBinding.timeToCallTextView.text =
-                    getStringTimeToCall(whatsNowViewModel.timeToCallCounter.value!!)
+                whatsNowBinding.timeToCallTextView.text = getStringTimeToCall(whatsNowViewModel.timeToCallCounter.value!!)
                 whatsNowBinding.whatsNextTitleCard.visibility = View.VISIBLE
                 whatsNowBinding.subjectCardView2.visibility = View.VISIBLE
                 setSubject2Card()
@@ -403,6 +407,9 @@ class WhatsNowFragment : Fragment() {
                 whatsNowBinding.whatsNextTitleCard.visibility = View.VISIBLE
                 whatsNowBinding.subjectCardView2.visibility = View.VISIBLE
                 setSubject2Card()
+                whatsNowBinding.weekdayNameCard2.visibility = View.VISIBLE
+                whatsNowBinding.weekDayName2.text = whatsNowBinding.root.context.resources.getStringArray(R.array.weekdays_array)[whatsNowViewModel.nextLesson!!.timeSlot.weekDay-1]
+
             }
             whatsNowViewModel.FREE_TIME -> {
                 whatsNowBinding.whatsNowTitleCard.visibility = View.VISIBLE
@@ -415,6 +422,8 @@ class WhatsNowFragment : Fragment() {
                 whatsNowBinding.whatsNextTitleCard.visibility = View.VISIBLE
                 whatsNowBinding.subjectCardView2.visibility = View.VISIBLE
                 setSubject2Card()
+                whatsNowBinding.weekdayNameCard2.visibility = View.VISIBLE
+                whatsNowBinding.weekDayName2.text = whatsNowBinding.root.context.resources.getStringArray(R.array.weekdays_array)[whatsNowViewModel.nextLesson!!.timeSlot.weekDay-1]
             }
             whatsNowViewModel.ORDINARY_LESSON -> {
                 whatsNowBinding.whatsNowTitleCard.visibility = View.VISIBLE
@@ -560,7 +569,7 @@ class WhatsNowFragment : Fragment() {
         val calendar = getCalendar()
         val now_time_mins = calendar.get(HOUR_OF_DAY) * 60 + calendar.get(MINUTE)
         val call_time_mins = hour * 60 + mins
-        val curWeekDay = calendar.get(DAY_OF_WEEK)
+        val curWeekDay = getRightDayNumber(calendar.get(DAY_OF_WEEK))
 
         var timerValue = ((call_time_mins - now_time_mins) * 60000).toLong()
 
@@ -577,8 +586,9 @@ class WhatsNowFragment : Fragment() {
 
     private fun getCalendar(): Calendar {
         val cal = Calendar.getInstance()
+        cal.firstDayOfWeek = Calendar.MONDAY
 
-        //воскресенье, 10-00
+        //четверг, 9-45
         //cal.set(DAY_OF_WEEK, 4)
         //cal.set(HOUR_OF_DAY, 9)
         //cal.set(MINUTE, 45)

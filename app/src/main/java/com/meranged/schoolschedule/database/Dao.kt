@@ -56,7 +56,7 @@ interface SchoolScheduleDao {
     @Query("SELECT * FROM time_slot WHERE number = :key")
     fun getTimeSlotsByNumber(key: Int): List<TimeSlot>
 
-    @Query("SELECT * FROM time_slot WHERE week_day = 1")
+    @Query("SELECT * FROM time_slot WHERE week_day = 1 ORDER BY number")
     fun getEtalonTimeSlots(): LiveData<List<TimeSlot>>
 
     @Query("SELECT * FROM subject WHERE subjectId = :key")
@@ -95,6 +95,9 @@ interface SchoolScheduleDao {
 
     @Query("DELETE FROM teacher WHERE teacherId = :key")
     fun deleteTeacher(key: Long)
+
+    @Query("DELETE FROM time_slot WHERE number = :key")
+    fun deleteEtalonTimeslot(key: Int)
 
     @Transaction
     fun deleteTeacherWithSubjectsUpd(key: Long){
@@ -154,6 +157,16 @@ interface SchoolScheduleDao {
 
                 insert(timeSlot)
             }
+        }
+    }
+
+    @Transaction
+    fun addEtalonTimeSlot(timeslot:TimeSlot){
+
+     // clone 6 timeslots for 6 weekdays
+     for (weekday in 1..6){
+         timeslot.weekDay = weekday
+         insert(timeslot)
         }
     }
 

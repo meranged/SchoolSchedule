@@ -58,6 +58,17 @@ class DayDetailsViewModel(
         }
     }
 
+    suspend fun clearTimeSlot(){
+        withContext(Dispatchers.IO) {
+
+            val ts = timeslot.value!!
+
+            ts.subject_id = -1
+
+            db.update(ts)
+        }
+    }
+
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()

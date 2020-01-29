@@ -1,6 +1,7 @@
 package com.meranged.schoolschedule.ui.lessonsschedule
 
 import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,6 +63,10 @@ class  LessonsScheduleAdapter(val clickListener: LessonsScheduleListener): ListA
             } else {
                 binding.weekdayNameCard.visibility = View.GONE
             }
+            /*
+            binding.lessonStart.setOnClickListener{
+                Log.i("SS_LOG LessonSchedule", item.timeSlot.toString())
+            }*/
 
 
             if (!item.subjects.isEmpty()){

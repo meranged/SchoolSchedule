@@ -65,6 +65,23 @@ class CallsScheduleFragment : Fragment() {
         val manager = GridLayoutManager(activity, 2)
         binding.slotsList.layoutManager = manager
 
+        binding.fabPlus.setOnClickListener{
+
+            val viewModelJob = Job()
+            val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+            uiScope.launch {
+                viewModel.addTimeSlot()
+            }
+        }
+
+        binding.fabMinus.setOnClickListener{
+            val viewModelJob = Job()
+            val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+            uiScope.launch {
+                viewModel.removeTimeSlot()
+            }
+        }
+
         return binding.root
     }
 
