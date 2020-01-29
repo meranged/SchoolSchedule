@@ -3,7 +3,6 @@ package com.meranged.schoolschedule.ui.subjects
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import com.meranged.schoolschedule.database.SchoolScheduleDao
-import com.meranged.schoolschedule.database.Subject
 import kotlinx.coroutines.*
 
 class SubjectsViewModel(

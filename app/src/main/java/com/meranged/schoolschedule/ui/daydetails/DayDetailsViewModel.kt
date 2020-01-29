@@ -1,12 +1,9 @@
 package com.meranged.schoolschedule.ui.daydetails
 
-import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.meranged.schoolschedule.database.SchoolScheduleDao
-import com.meranged.schoolschedule.database.Subject
 import com.meranged.schoolschedule.database.TimeSlot
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

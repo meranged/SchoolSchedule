@@ -1,8 +1,7 @@
 package com.meranged.schoolschedule.ui.callsschedule
 
 import android.app.Application
-import androidx.lifecycle.*
-import com.meranged.schoolschedule.App
+import androidx.lifecycle.AndroidViewModel
 import com.meranged.schoolschedule.database.SchoolScheduleDao
 import com.meranged.schoolschedule.database.TimeSlot
 import kotlinx.coroutines.*

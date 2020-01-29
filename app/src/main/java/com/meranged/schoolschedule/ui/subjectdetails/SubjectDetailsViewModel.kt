@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.meranged.schoolschedule.database.SchoolScheduleDao
 import com.meranged.schoolschedule.database.Subject
-import com.meranged.schoolschedule.database.Teacher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

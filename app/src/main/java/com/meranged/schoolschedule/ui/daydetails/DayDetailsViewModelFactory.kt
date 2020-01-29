@@ -1,6 +1,5 @@
 package com.meranged.schoolschedule.ui.daydetails
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.meranged.schoolschedule.database.SchoolScheduleDao

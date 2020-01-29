@@ -1,10 +1,8 @@
 package com.meranged.schoolschedule.ui.subjectdetails
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.meranged.schoolschedule.database.SchoolScheduleDao
-import com.meranged.schoolschedule.ui.myteachers.MyTeachersViewModel
 
 class SubjectDetailsViewModelFactory(
     private val subject_id: Long = 0L,

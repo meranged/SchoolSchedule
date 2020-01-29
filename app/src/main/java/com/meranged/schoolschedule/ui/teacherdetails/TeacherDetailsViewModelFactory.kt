@@ -1,10 +1,8 @@
 package com.meranged.schoolschedule.ui.teacherdetails
 
-import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.meranged.schoolschedule.database.SchoolScheduleDao
-import com.meranged.schoolschedule.ui.callsschedule.CallsScheduleViewModel
 
 /*
  * Copyright 2019, The Android Open Source Project

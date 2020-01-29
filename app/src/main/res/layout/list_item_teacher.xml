@@ -57,7 +57,7 @@
                 android:layout_marginBottom="@dimen/time_vertical_padding"
                 android:layout_marginStart="@dimen/time_vertical_padding"
                 android:layout_marginEnd="@dimen/time_vertical_padding"
-                android:text="Юлия Владимировна Хотовицкая"
+                tools:text="Юлия Владимировна Хотовицкая"
                 android:textSize="@dimen/teacher_name_text_size"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/teacherImageView2"
@@ -69,10 +69,11 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/time_vertical_padding"
                 android:padding="1dp"
-                android:text="Математика, Русский язык, Литература"
+                tools:text="Математика, Русский язык, Литература"
                 android:background="@drawable/rounded_corner2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/teacherImageView2" />
+                app:layout_constraintTop_toBottomOf="@+id/teacherFIO"
+                app:layout_constraintStart_toEndOf="@+id/teacherImageView2"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

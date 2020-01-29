@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.meranged.schoolschedule.database.Teacher
 import com.meranged.schoolschedule.database.TeacherWithSubjects
 import com.meranged.schoolschedule.databinding.ListItemTeacherBinding
-import com.meranged.schoolschedule.databinding.ListItemTimeSlotBinding
 import java.io.ByteArrayInputStream
 
 class  MyTeachersAdapter(val clickListener: MyTeachersListener): ListAdapter<TeacherWithSubjects, MyTeachersAdapter.ViewHolder>(MyTeachersDiffCallback()) {

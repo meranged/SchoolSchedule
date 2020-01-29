@@ -1,31 +1,49 @@
 package com.meranged.schoolschedule
 
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+
 fun getHoursFromMins(mins:Int):Int {
-    var hours:Int = 0
 
-    hours = mins/60
-
-    return hours
+    return mins/60
 }
 
 fun getMinsFromMins(mins:Int):Int {
 
-    var l_mins:Int = 0
+    val hours:Int = mins/60
 
-    var hours:Int = mins/60
-
-    l_mins = mins - hours*60
+    val l_mins = mins - hours*60
 
     return l_mins
 }
 
 fun convertIntTo00(intValue: Int): String{
-    var ls: String = String()
 
-    ls = intValue.toString()
+    var ls = intValue.toString()
     if (ls.length == 1){
         ls = "0${ls}"
     }
 
     return ls
+}
+
+class ScrollAwareFABBehavior (val recyclerView: RecyclerView, val floatingActionButton: FloatingActionButton) {
+
+    fun start() {
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (dy > 0) {
+                    if (floatingActionButton.isShown) {
+                        floatingActionButton.hide()
+                    }
+                } else if (dy < 0) {
+                    if (!floatingActionButton.isShown) {
+                        floatingActionButton.show()
+                    }
+                }
+            }
+        })
+    }
 }

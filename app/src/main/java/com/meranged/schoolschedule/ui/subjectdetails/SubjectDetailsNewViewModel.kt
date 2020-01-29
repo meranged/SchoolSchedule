@@ -3,8 +3,9 @@ package com.meranged.schoolschedule.ui.subjectdetails
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import com.meranged.schoolschedule.database.SchoolScheduleDao
-import com.meranged.schoolschedule.database.Teacher
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 
 class SubjectDetailsNewViewModel(
     val database: SchoolScheduleDao,

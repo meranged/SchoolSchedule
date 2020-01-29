@@ -53,7 +53,7 @@
     <fragment
         android:id="@+id/dayDetailsFragment"
         android:name="com.meranged.schoolschedule.ui.daydetails.DayDetailsFragment"
-        android:label="day_details_fragment"
+        android:label="@string/title_timeslot_subject"
         tools:layout="@layout/day_details_fragment" >
         <action
             android:id="@+id/action_dayDetailsFragment_to_navigation_lessons_schedule"

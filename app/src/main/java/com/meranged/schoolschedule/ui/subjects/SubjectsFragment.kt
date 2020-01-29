@@ -1,24 +1,20 @@
 package com.meranged.schoolschedule.ui.subjects
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.meranged.schoolschedule.R
+import com.meranged.schoolschedule.ScrollAwareFABBehavior
 import com.meranged.schoolschedule.database.SchoolScheduleDatabase
-import com.meranged.schoolschedule.database.Subject
 import com.meranged.schoolschedule.database.SubjectWithTeacher
-import com.meranged.schoolschedule.database.Teacher
-import com.meranged.schoolschedule.databinding.MyTeachersFragmentBinding
 import com.meranged.schoolschedule.databinding.SubjectsFragmentBinding
-import com.meranged.schoolschedule.ui.myteachers.*
 
 class SubjectsFragment : Fragment() {
 
@@ -71,6 +67,8 @@ class SubjectsFragment : Fragment() {
                     SubjectsFragmentDirections
                         .actionNavigationSubjectsToSubjectDetailsNewFragment())
         }
+
+        ScrollAwareFABBehavior(binding.subjectsList, binding.fab).start()
 
         return binding.root
     }

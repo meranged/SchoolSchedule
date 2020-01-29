@@ -1,35 +1,20 @@
 package com.meranged.schoolschedule.ui.myteachers
 
-import android.app.TimePickerDialog
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TimePicker
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.meranged.schoolschedule.R
+import com.meranged.schoolschedule.ScrollAwareFABBehavior
 import com.meranged.schoolschedule.database.SchoolScheduleDatabase
 import com.meranged.schoolschedule.database.Teacher
-import com.meranged.schoolschedule.database.TimeSlot
-import com.meranged.schoolschedule.databinding.CallsScheduleFragmentBinding
 import com.meranged.schoolschedule.databinding.MyTeachersFragmentBinding
-import com.meranged.schoolschedule.ui.callsschedule.CallsScheduleAdapter
-import com.meranged.schoolschedule.ui.callsschedule.CallsScheduleListener
-import com.meranged.schoolschedule.ui.callsschedule.CallsScheduleViewModel
-import com.meranged.schoolschedule.ui.callsschedule.CallsScheduleViewModelFactory
-import com.meranged.schoolschedule.ui.teacherdetails.TeacherDetailsFragmentDirections
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 
 class MyTeachersFragment : Fragment() {
 
@@ -83,6 +68,8 @@ class MyTeachersFragment : Fragment() {
                         .actionNavigationMyTeachersToTeacherDetailsNewFragment())
         }
 
+        ScrollAwareFABBehavior(binding.myTeachersList, binding.fab).start()
+
         return binding.root
     }
 
@@ -93,5 +80,7 @@ class MyTeachersFragment : Fragment() {
                 MyTeachersFragmentDirections
                     .actionNavigationMyTeachersToTeacherDetailsFragment(item.teacherId))
     }
+
+
 
 }

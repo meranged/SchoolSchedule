@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.meranged.schoolschedule.database.Subject
 import com.meranged.schoolschedule.database.SubjectWithTeacher
 import com.meranged.schoolschedule.databinding.ListItemSubjectBinding
 import com.meranged.schoolschedule.databinding.ListItemTimeSlotBinding

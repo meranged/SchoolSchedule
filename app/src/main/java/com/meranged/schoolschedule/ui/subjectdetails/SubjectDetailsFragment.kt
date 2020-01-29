@@ -1,27 +1,24 @@
 package com.meranged.schoolschedule.ui.subjectdetails
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-
 import com.meranged.schoolschedule.R
 import com.meranged.schoolschedule.database.SchoolScheduleDatabase
 import com.meranged.schoolschedule.database.Subject
 import com.meranged.schoolschedule.databinding.SubjectDetailsFragmentBinding
-import com.meranged.schoolschedule.databinding.TeacherDetailsFragmentBinding
-import com.meranged.schoolschedule.ui.teacherdetails.TeacherDetailsFragmentArgs
-import com.meranged.schoolschedule.ui.teacherdetails.TeacherDetailsFragmentDirections
-import com.meranged.schoolschedule.ui.teacherdetails.TeacherDetailsViewModel
-import com.meranged.schoolschedule.ui.teacherdetails.TeacherDetailsViewModelFactory
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
 class SubjectDetailsFragment : Fragment() {
 

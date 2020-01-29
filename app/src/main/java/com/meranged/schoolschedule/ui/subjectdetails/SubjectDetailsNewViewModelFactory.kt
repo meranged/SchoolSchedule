@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.meranged.schoolschedule.database.SchoolScheduleDao
-import com.meranged.schoolschedule.ui.myteachers.MyTeachersViewModel
 
 class SubjectDetailsNewViewModelFactory(
     private val dataSource: SchoolScheduleDao,
