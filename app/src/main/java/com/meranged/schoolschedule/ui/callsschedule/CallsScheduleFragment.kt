@@ -63,6 +63,7 @@ class CallsScheduleFragment : Fragment() {
         })
 
         val manager = GridLayoutManager(activity, 2)
+
         binding.slotsList.layoutManager = manager
 
         binding.fabPlus.setOnClickListener{

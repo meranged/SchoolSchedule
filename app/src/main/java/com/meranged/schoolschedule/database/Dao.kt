@@ -223,7 +223,7 @@ interface SchoolScheduleDao {
     fun checkAndFillTimeSlots(){
         val count = getCountOfTimeSlots()
         Log.i("dbdebug","count of timeslots = $count")
-        if (count < 36){
+        if (count < 6){
             fillTimeSlotsInitialData()
         }
     }

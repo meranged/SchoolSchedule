@@ -12,9 +12,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
+import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.meranged.schoolschedule.App
 import com.meranged.schoolschedule.R
 import com.meranged.schoolschedule.database.SchoolScheduleDatabase
 import com.meranged.schoolschedule.database.Teacher
@@ -27,6 +29,7 @@ class TeacherDetailsNewFragment : Fragment() {
 
     val REQUEST_IMAGE_CAPTURE = 1
     val REQUEST_IMAGE_GALLERY = 2
+    var isPictureSet = false
     lateinit var photo:ImageView
 
     override fun onCreateView(
@@ -74,9 +77,9 @@ class TeacherDetailsNewFragment : Fragment() {
                 teacher.thirdName = binding.name3EditText.text.toString()
 
 
-                if (photo != null){
+                if ((photo != null) and isPictureSet){
                     val stream = ByteArrayOutputStream()
-                    val bm = (photo.getDrawable() as BitmapDrawable).bitmap
+                    val bm = photo.drawable.toBitmap()
 
                     bm.compress(Bitmap.CompressFormat.JPEG, 100, stream)
                     teacher.photo = stream.toByteArray()
@@ -128,6 +131,7 @@ class TeacherDetailsNewFragment : Fragment() {
             imageBitmap = data!!.extras.get("data") as Bitmap
             imageBitmap = resizeBitmap(imageBitmap, 800)
             photo.setImageBitmap(imageBitmap)
+            isPictureSet = true
         }
 
         if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == Activity.RESULT_OK) {
@@ -135,6 +139,7 @@ class TeacherDetailsNewFragment : Fragment() {
             imageBitmap = MediaStore.Images.Media.getBitmap(activity!!.applicationContext.contentResolver, selectedImage);
             imageBitmap = resizeBitmap(imageBitmap, 800)
             photo.setImageBitmap(imageBitmap)
+            isPictureSet = true
         }
 
 
