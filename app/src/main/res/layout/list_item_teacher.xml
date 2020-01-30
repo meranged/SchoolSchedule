@@ -39,20 +39,22 @@
                 android:id="@+id/teacherFIO"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/time_vertical_padding"
                 android:layout_marginStart="@dimen/time_vertical_padding"
                 android:layout_marginEnd="@dimen/time_vertical_padding"
-                tools:text="Юлия Владимировна Хотовицкая"
+                android:textAlignment="center"
                 android:textSize="@dimen/teacher_name_text_size"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/teacherImageView"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Юлия Владимировна Хотовицкая" />
             <View
                 android:id="@+id/divider"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintStart_toEndOf="@id/teacherImageView"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/teacherFIO"/>
 
             <TextView
@@ -61,10 +63,11 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/time_vertical_padding"
                 android:padding="1dp"
-                tools:text="Математика, Русский язык, Литература"
-                app:layout_constraintTop_toBottomOf="@+id/divider"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/teacherImageView"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/divider"
+                tools:text="Математика, Русский язык, Литература" />
 
 
 

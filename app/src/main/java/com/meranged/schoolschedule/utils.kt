@@ -34,6 +34,17 @@ fun getRightDayNumber(wrongDay:Int):Int{
         return wrongDay -1
 }
 
+fun getStringFromDaysList(daysList:List<Int>):String{
+    var stringDays = ""
+    for(item in daysList){
+        if (stringDays.length > 2) {
+            stringDays = stringDays + ", "
+        }
+        stringDays = stringDays + App.context!!.resources.getStringArray(R.array.weekdays_array)[item-1]
+    }
+    return stringDays
+}
+
 class ScrollAwareFABBehavior (val recyclerView: RecyclerView, val floatingActionButton: FloatingActionButton) {
 
     fun start() {

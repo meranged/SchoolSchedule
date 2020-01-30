@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.meranged.schoolschedule.App
+import com.meranged.schoolschedule.R
 import com.meranged.schoolschedule.database.SubjectWithTeacher
 import com.meranged.schoolschedule.databinding.ListItemSubjectBinding
 import com.meranged.schoolschedule.databinding.ListItemTimeSlotBinding
@@ -13,7 +15,11 @@ import java.io.ByteArrayInputStream
 
 class  SubjectsAdapter(val clickListener: SubjectsListener): ListAdapter<SubjectWithTeacher, SubjectsAdapter.ViewHolder>(SubjectsDiffCallback()) {
 
+    lateinit var viewModelOuter:SubjectsViewModel
+
     class ViewHolder private constructor (val binding: ListItemSubjectBinding) : RecyclerView.ViewHolder(binding.root){
+
+        lateinit var viewModelInner:SubjectsViewModel
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
@@ -44,7 +50,8 @@ class  SubjectsAdapter(val clickListener: SubjectsListener): ListAdapter<Subject
 
             binding.subjectName.text = item.subject.name
             binding.roomNumber.text = item.subject.roomNumber
-            binding.teacherOfSubject.text = s_name
+            binding.teacherName.text = s_name
+            binding.weekDaysListTextView.text = viewModelInner.getSubjectWeekDays(item.subject.subjectId)
 
             binding.clickListener = clickListener
         }
@@ -52,14 +59,11 @@ class  SubjectsAdapter(val clickListener: SubjectsListener): ListAdapter<Subject
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding =
-            ListItemTimeSlotBinding.inflate(layoutInflater, parent, false)
         return ViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
+        holder.viewModelInner = viewModelOuter
         holder.bind(getItem(position)!!, clickListener)
 
     }

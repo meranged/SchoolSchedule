@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
@@ -17,8 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/time_card_distance"
         app:cardCornerRadius="@dimen/time_card_radius"
-        app:cardElevation="@dimen/time_card_elevation"
-        app:contentPadding="@dimen/time_card_content_padding">
+        app:cardElevation="@dimen/time_card_elevation">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,62 +26,93 @@
             android:onClick="@{() -> clickListener.onClick(subject)}">
 
             <TextView
-                android:id="@+id/subjectName"
-                android:layout_width="0dp"
+                android:id="@+id/weekDaysListTextView"
+                android:layout_width="@dimen/teacher_image_size_small"
                 android:layout_height="wrap_content"
-                android:text="@string/subject1_name"
-                android:layout_margin="@dimen/time_vertical_padding"
-                android:textSize="@dimen/subject_name_text_size"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="8sp"
+                android:padding="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/roomNumber"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Понедельник, Вторник, Среда, Четверг" />
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/weekDaysListTextView"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/roomNumber"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/teacher_image_size_small"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/time_horizontal_padding"
-                android:text="@string/subject_place1"
-                android:textSize="@dimen/subject_name_text_size"
-                android:background="@drawable/rounded_corner"
-                android:padding="@dimen/time_horizontal_padding"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/white"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_margin="1dp"
+                android:textAlignment="center"
+                android:textSize="@dimen/lessons_schedule_subject_name_text_size"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/divider4"
+                app:layout_constraintEnd_toEndOf="@+id/divider3"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="203" />
+            <View
+                android:id="@+id/divider3"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/roomNumber"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/teacherImageCard"
-                android:layout_width="@dimen/teacher_image_size_small2"
-                android:layout_height="@dimen/teacher_image_size_small2"
-                android:layout_margin="@dimen/time_horizontal_padding"
-                app:layout_constraintTop_toBottomOf="@+id/roomNumber"
+            <ImageView
+                android:id="@+id/teacherImageView"
+                android:layout_width="@dimen/teacher_image_size_small"
+                android:layout_height="@dimen/teacher_image_size_small"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:cardElevation="10dp"
-                app:cardCornerRadius="20dp">
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_face_black_24dp" />
 
-                <ImageView
-                    android:id="@+id/teacherImageView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/ic_face_black_24dp" />
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toStartOf="@id/teacherImageView"
+                app:layout_constraintStart_toEndOf="@+id/divider3"
+                app:layout_constraintTop_toBottomOf="@id/subjectName" />
 
-            </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/teacherOfSubject"
+                android:id="@+id/subjectName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/time_vertical_padding"
-                android:text=""
-                android:textSize="@dimen/subject_teacher_text_size"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/teacherImageCard"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                android:layout_margin="2dp"
+                android:textAlignment="center"
+                android:textSize="@dimen/lessons_schedule_subject_name_text_size"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/teacherImageView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/divider3"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/subject1_name" />
+
+            <TextView
+                android:id="@+id/teacherName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:textAlignment="center"
+                android:textSize="@dimen/lessons_schedule_subject_name_text_size"
+                app:layout_constraintEnd_toStartOf="@+id/teacherImageView"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/divider3"
+                app:layout_constraintTop_toTopOf="@id/divider2"
+                tools:text="Хотовицкая" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

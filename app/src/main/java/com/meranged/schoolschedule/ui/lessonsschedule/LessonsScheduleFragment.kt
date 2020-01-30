@@ -60,6 +60,7 @@ class LessonsScheduleFragment : Fragment() {
         viewModel.teachers_list.observe(viewLifecycleOwner, Observer {
             it?.let {
                 LessonsScheduleAdapter.ViewHolder.setTeachersList(it)
+                adapter.notifyDataSetChanged()
             }
         })
 

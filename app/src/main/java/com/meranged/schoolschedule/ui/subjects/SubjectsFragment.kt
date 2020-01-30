@@ -50,11 +50,20 @@ class SubjectsFragment : Fragment() {
             onClickShowDetails(subject)
         })
 
+        adapter.viewModelOuter = viewModel
+
         binding.subjectsList.adapter = adapter
 
         viewModel.subjects_with_teachers_list.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
+            }
+        })
+
+        viewModel.timeslots_list_gen.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                viewModel.timeslots_list = it
+                adapter.notifyDataSetChanged()
             }
         })
 

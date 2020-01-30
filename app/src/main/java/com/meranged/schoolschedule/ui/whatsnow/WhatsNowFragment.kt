@@ -387,7 +387,7 @@ class WhatsNowFragment : Fragment() {
             whatsNowViewModel.MORNING_BEFORE_SCHOOL -> {
                 whatsNowBinding.whatsNowTitleCard.visibility = View.VISIBLE
                 whatsNowBinding.freeTimeCardView.visibility = View.VISIBLE
-                whatsNowBinding.freeTimeTextView.text = "Доброе утро! Не опоздай в школу!"
+                whatsNowBinding.freeTimeTextView.text = getString(R.string.good_morning_dont_be_late)
                 whatsNowBinding.timeToCallTitleCard.visibility = View.VISIBLE
                 whatsNowBinding.timeToCallCard.visibility = View.VISIBLE
                 whatsNowBinding.timeToCallTextView.text = getStringTimeToCall(whatsNowViewModel.timeToCallCounter.value!!)
@@ -399,7 +399,7 @@ class WhatsNowFragment : Fragment() {
             whatsNowViewModel.EVENING_AFTER_SCHOOL -> {
                 whatsNowBinding.whatsNowTitleCard.visibility = View.VISIBLE
                 whatsNowBinding.freeTimeCardView.visibility = View.VISIBLE
-                whatsNowBinding.freeTimeTextView.text = "Уроки закончились, отдыхаем!"
+                whatsNowBinding.freeTimeTextView.text = getString(R.string.lessons_finished_take_a_rest)
                 whatsNowBinding.timeToCallTitleCard.visibility = View.VISIBLE
                 whatsNowBinding.timeToCallCard.visibility = View.VISIBLE
                 whatsNowBinding.timeToCallTextView.text =
@@ -414,7 +414,7 @@ class WhatsNowFragment : Fragment() {
             whatsNowViewModel.FREE_TIME -> {
                 whatsNowBinding.whatsNowTitleCard.visibility = View.VISIBLE
                 whatsNowBinding.freeTimeCardView.visibility = View.VISIBLE
-                whatsNowBinding.freeTimeTextView.text = "Сегодня выходной, отдыхаем!"
+                whatsNowBinding.freeTimeTextView.text = getString(R.string.today_is_weekend_take_a_rest)
                 whatsNowBinding.timeToCallTitleCard.visibility = View.VISIBLE
                 whatsNowBinding.timeToCallCard.visibility = View.VISIBLE
                 whatsNowBinding.timeToCallTextView.text =
@@ -435,7 +435,7 @@ class WhatsNowFragment : Fragment() {
                     getStringTimeToCall(whatsNowViewModel.timeToCall)
                 whatsNowBinding.whatsNextTitleCard.visibility = View.VISIBLE
                 whatsNowBinding.freeTimeCardView2.visibility = View.VISIBLE
-                whatsNowBinding.freeTimeTextView2.text = "Перемена!"
+                whatsNowBinding.freeTimeTextView2.text = getString(R.string.its_a_school_break)
 
             }
             whatsNowViewModel.LAST_LESSON -> {
@@ -448,12 +448,12 @@ class WhatsNowFragment : Fragment() {
                     getStringTimeToCall(whatsNowViewModel.timeToCall)
                 whatsNowBinding.whatsNextTitleCard.visibility = View.VISIBLE
                 whatsNowBinding.freeTimeCardView2.visibility = View.VISIBLE
-                whatsNowBinding.freeTimeTextView2.text = "Домой!"
+                whatsNowBinding.freeTimeTextView2.text = getString(R.string.go_home)
             }
             whatsNowViewModel.SCHOOL_BREAK -> {
                 whatsNowBinding.whatsNowTitleCard.visibility = View.VISIBLE
                 whatsNowBinding.freeTimeCardView.visibility = View.VISIBLE
-                whatsNowBinding.freeTimeTextView.text = "Перемена"
+                whatsNowBinding.freeTimeTextView.text = getString(R.string.its_a_school_break)
                 whatsNowBinding.timeToCallCard.visibility = View.VISIBLE
                 whatsNowBinding.timeToCallTextView.text =
                     getStringTimeToCall(whatsNowViewModel.timeToCall)
@@ -493,6 +493,8 @@ class WhatsNowFragment : Fragment() {
         whatsNowBinding.lessonStart2.text = "${convertIntTo00(lesson.timeSlot.startTimeHours)}:${convertIntTo00(lesson.timeSlot.startTimeMinutes)}"
         whatsNowBinding.lessonFinish2.text = "${convertIntTo00(lesson.timeSlot.finishTimeHours)}:${convertIntTo00(lesson.timeSlot.finishTimeMinutes)}"
 
+        whatsNowBinding.lessonNumber2.text = lesson.timeSlot.number.toString()
+
 
         if (teacher == null) {
             whatsNowBinding.teacherName2.visibility = View.INVISIBLE
@@ -525,6 +527,7 @@ class WhatsNowFragment : Fragment() {
 
         whatsNowBinding.subjectName.text = lesson.subjects[0].name
         whatsNowBinding.roomNumber.text = lesson.subjects[0].roomNumber
+        whatsNowBinding.lessonNumber.text = lesson.timeSlot.number.toString()
         whatsNowBinding.lessonStart.text = "${convertIntTo00(lesson.timeSlot.startTimeHours)}:${convertIntTo00(lesson.timeSlot.startTimeMinutes)}"
         whatsNowBinding.lessonFinish.text = "${convertIntTo00(lesson.timeSlot.finishTimeHours)}:${convertIntTo00(lesson.timeSlot.finishTimeMinutes)}"
 
@@ -561,7 +564,7 @@ class WhatsNowFragment : Fragment() {
         if (teacher == null) {
             return ""
         } else {
-            return teacher.thirdName
+            return teacher.firstName + " " + teacher.secondName
         }
     }
 

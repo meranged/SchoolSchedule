@@ -78,7 +78,7 @@ interface SchoolScheduleDao {
     @Query("SELECT * FROM teacher ORDER BY teacherId DESC")
     fun getAllTeachersAsList(): List<Teacher>
 
-    @Query("SELECT * FROM time_slot ORDER BY timeslotId DESC")
+    @Query("SELECT * FROM time_slot ORDER BY week_day, number ASC")
     fun getAllTimeSlots(): LiveData<List<TimeSlot>>
 
     @Query("SELECT COUNT(*) FROM time_slot")
@@ -89,6 +89,12 @@ interface SchoolScheduleDao {
 
     @Query("SELECT COUNT(*) FROM subject")
     fun getCountOfSubjects(): Int
+
+    @Query("SELECT DISTINCT week_day FROM time_slot WHERE subject_id = :subj_id ORDER BY week_day ASC")
+    fun getSubjectWeekDays(subj_id: Long): LiveData<List<Int>>
+
+    @Query("SELECT DISTINCT week_day FROM time_slot, subject WHERE subject.subjectId = time_slot.subject_id AND subject.teacher_id = :teach_id ORDER BY week_day ASC")
+    fun getTeacherWeekDays(teach_id: Long): LiveData<List<Int>>
 
     @Query("DELETE FROM teacher")
     fun deleteAllTeachers()

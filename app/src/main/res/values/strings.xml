@@ -68,4 +68,9 @@
     <string name="now_is_going">Сейчас идёт</string>
     <string name="time_to_call_text">До звонка осталось:</string>
     <string name="after_that_text">Потом</string>
+    <string name="lessons_finished_take_a_rest">Уроки закончились, отдыхаем, делаем домашнее задание!</string>
+    <string name="good_morning_dont_be_late">Доброе утро! Не опоздай в школу!</string>
+    <string name="today_is_weekend_take_a_rest">Сегодня выходной, отдыхаем!</string>
+    <string name="its_a_school_break">Перемена!</string>
+    <string name="go_home">Домой!</string>
 </resources>
