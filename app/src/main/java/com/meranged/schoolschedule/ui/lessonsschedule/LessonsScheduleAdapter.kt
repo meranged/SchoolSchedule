@@ -1,6 +1,7 @@
 package com.meranged.schoolschedule.ui.lessonsschedule
 
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -58,6 +59,13 @@ class  LessonsScheduleAdapter(val clickListener: LessonsScheduleListener): ListA
             binding.teacherName.text = ""
             binding.lessonNumber.text = item.timeSlot.number.toString()
 
+            if (item.timeSlot.comment.isEmpty()) {
+                binding.lessonNumber.background.alpha = 0
+            } else {
+                binding.lessonNumber.background.alpha = 255
+            }
+
+
             if (item.timeSlot.number == 1){
                 binding.weekDayName.text = res.getStringArray(R.array.weekdays_array)[item.timeSlot.weekDay-1]
                 binding.weekdayNameCard.visibility = View.VISIBLE
@@ -83,9 +91,14 @@ class  LessonsScheduleAdapter(val clickListener: LessonsScheduleListener): ListA
                     if (l_teacher != null) {
                         binding.teacherName.text = l_teacher.firstName + " " + l_teacher.secondName
 
+                        /*
                         if (l_teacher.photo != null) {
                             val arrayInputStream = ByteArrayInputStream(l_teacher.photo)
                             binding.teacherImageView.setImageBitmap(BitmapFactory.decodeStream(arrayInputStream))
+                        }*/
+
+                        if (l_teacher.photo_path.isNotEmpty()){
+                            binding.teacherImageView.setImageURI(Uri.parse(l_teacher.photo_path))
                         }
 
                     }

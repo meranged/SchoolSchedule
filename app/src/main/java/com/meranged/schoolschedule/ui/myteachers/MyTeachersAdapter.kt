@@ -1,6 +1,7 @@
 package com.meranged.schoolschedule.ui.myteachers
 
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,9 +35,14 @@ class  MyTeachersAdapter(val clickListener: MyTeachersListener): ListAdapter<Tea
             binding.teacherFIO.text = item.teacher.firstName + " " + item.teacher.secondName + " " + item.teacher.thirdName
             binding.teacherSubjectsList.text = ""
 
+            /*
             if (item.teacher.photo != null) {
                 val arrayInputStream = ByteArrayInputStream(item.teacher.photo)
                 binding.teacherImageView.setImageBitmap(BitmapFactory.decodeStream(arrayInputStream))
+            }*/
+
+            if (item.teacher.photo_path.isNotEmpty()){
+                binding.teacherImageView.setImageURI(Uri.parse(item.teacher.photo_path))
             }
 
             var l_subjs = ""

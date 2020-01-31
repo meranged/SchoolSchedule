@@ -19,6 +19,10 @@
         <action
             android:id="@+id/action_navigation_lessons_schedule_to_dayDetailsFragment"
             app:destination="@id/dayDetailsFragment" />
+        <action
+            android:id="@+id/action_navigation_lessons_schedule_to_homeWorkFragment"
+            app:destination="@id/homeWorkFragment"
+            app:popUpTo="@+id/navigation_lessons_schedule" />
     </fragment>
     <fragment
         android:id="@+id/navigation_subjects"
@@ -103,5 +107,20 @@
         <action
             android:id="@+id/action_subjectDetailsNewFragment_to_navigation_subjects"
             app:destination="@id/navigation_subjects" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeWorkFragment"
+        android:name="com.meranged.schoolschedule.ui.homework.HomeWorkFragment"
+        android:label="@string/home_work_fragment_title"
+        tools:layout="@layout/home_work_fragment" >
+        <action
+            android:id="@+id/action_homeWorkFragment_to_navigation_lessons_schedule"
+            app:destination="@id/navigation_lessons_schedule" />
+        <action
+            android:id="@+id/action_homeWorkFragment_to_dayDetailsFragment"
+            app:destination="@id/dayDetailsFragment" />
+        <argument
+            android:name="timeslot_id"
+            app:argType="long" />
     </fragment>
 </navigation>

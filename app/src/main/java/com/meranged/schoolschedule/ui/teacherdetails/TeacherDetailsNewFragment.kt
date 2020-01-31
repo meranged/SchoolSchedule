@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,8 +22,10 @@ import com.meranged.schoolschedule.R
 import com.meranged.schoolschedule.database.SchoolScheduleDatabase
 import com.meranged.schoolschedule.database.Teacher
 import com.meranged.schoolschedule.databinding.TeacherDetailsNewFragmentBinding
+import com.meranged.schoolschedule.saveImageToInternalStorage
 import kotlinx.coroutines.*
 import java.io.ByteArrayOutputStream
+import java.net.URI
 
 
 class TeacherDetailsNewFragment : Fragment() {
@@ -30,6 +33,7 @@ class TeacherDetailsNewFragment : Fragment() {
     val REQUEST_IMAGE_CAPTURE = 1
     val REQUEST_IMAGE_GALLERY = 2
     var isPictureSet = false
+    var pic_path: Uri? = null
     lateinit var photo:ImageView
 
     override fun onCreateView(
@@ -75,15 +79,19 @@ class TeacherDetailsNewFragment : Fragment() {
                 teacher.firstName = binding.name1EditText.text.toString()
                 teacher.secondName = binding.name2EditText.text.toString()
                 teacher.thirdName = binding.name3EditText.text.toString()
-
-
+                if (pic_path != null){
+                    if (pic_path.toString() != null) {
+                        teacher.photo_path = pic_path.toString()
+                    }
+                }
+/*
                 if ((photo != null) and isPictureSet){
                     val stream = ByteArrayOutputStream()
                     val bm = photo.drawable.toBitmap()
 
                     bm.compress(Bitmap.CompressFormat.JPEG, 100, stream)
                     teacher.photo = stream.toByteArray()
-                }
+                }*/
 
                 uiScope.launch {
                     insertTeacher(teacher)
@@ -127,21 +135,26 @@ class TeacherDetailsNewFragment : Fragment() {
 
         var imageBitmap:Bitmap
 
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            imageBitmap = data!!.extras.get("data") as Bitmap
-            imageBitmap = resizeBitmap(imageBitmap, 800)
-            photo.setImageBitmap(imageBitmap)
-            isPictureSet = true
-        }
+        if (data != null) {
 
-        if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == Activity.RESULT_OK) {
-            val selectedImage: Uri = data!!.data
-            imageBitmap = MediaStore.Images.Media.getBitmap(activity!!.applicationContext.contentResolver, selectedImage);
-            imageBitmap = resizeBitmap(imageBitmap, 800)
-            photo.setImageBitmap(imageBitmap)
-            isPictureSet = true
-        }
+            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+                if (data.extras != null) {
+                    imageBitmap = data.extras.get("data") as Bitmap
+                    //imageBitmap = resizeBitmap(imageBitmap, 800)
+                    photo.setImageBitmap(imageBitmap)
+                    pic_path = saveImageToInternalStorage(imageBitmap)
+                    isPictureSet = true
+                }
+            }
 
+            if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == Activity.RESULT_OK) {
+                pic_path = data!!.data
+                //imageBitmap = MediaStore.Images.Media.getBitmap(activity!!.applicationContext.contentResolver, pic_path);
+                //imageBitmap = resizeBitmap(imageBitmap, 800)
+                photo.setImageURI(pic_path)
+                isPictureSet = true
+            }
+        }
 
     }
 

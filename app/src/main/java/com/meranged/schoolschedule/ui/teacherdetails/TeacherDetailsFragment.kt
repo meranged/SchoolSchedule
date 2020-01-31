@@ -1,5 +1,6 @@
 package com.meranged.schoolschedule.ui.teacherdetails
 
+import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
@@ -21,6 +22,7 @@ import androidx.navigation.findNavController
 import com.meranged.schoolschedule.R
 import com.meranged.schoolschedule.database.SchoolScheduleDatabase
 import com.meranged.schoolschedule.databinding.TeacherDetailsFragmentBinding
+import com.meranged.schoolschedule.saveImageToInternalStorage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -37,6 +39,8 @@ class TeacherDetailsFragment : Fragment() {
     private lateinit var teacherDetailsViewModel: TeacherDetailsViewModel
     val REQUEST_IMAGE_CAPTURE = 1
     val REQUEST_IMAGE_GALLERY = 2
+    var isPictureSet = false
+    var pic_path: Uri? = null
     lateinit var l_imageView: ImageView
 
     override fun onCreateView(
@@ -74,7 +78,7 @@ class TeacherDetailsFragment : Fragment() {
 
         binding.saveButton.setOnClickListener{
             uiScope.launch {
-                teacherDetailsViewModel.updateTeacher()
+                teacherDetailsViewModel.updateTeacher(pic_path)
             }
             view!!.findNavController()
                 .navigate(TeacherDetailsFragmentDirections
@@ -114,9 +118,10 @@ class TeacherDetailsFragment : Fragment() {
         l_imageView = binding.imageView
 
         teacherDetailsViewModel.teacher.observe(this, Observer{
-            if (it.photo != null){
-                val arrayInputStream = ByteArrayInputStream(it.photo)
-                l_imageView.setImageBitmap(BitmapFactory.decodeStream(arrayInputStream))
+            if (it.photo_path.isNotEmpty()){
+                //val arrayInputStream = ByteArrayInputStream(it.photo)
+                //l_imageView.setImageBitmap(BitmapFactory.decodeStream(arrayInputStream))
+                l_imageView.setImageURI(Uri.parse(it.photo_path))
             } else {
                 Log.i("Teacher=", it.toString())
             }
@@ -142,16 +147,29 @@ class TeacherDetailsFragment : Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            val imageBitmap = data!!.extras.get("data") as Bitmap
-            teacherDetailsViewModel.setPicture(resizeBitmap(imageBitmap, 800))
 
-        }
+        var imageBitmap:Bitmap
 
-        if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == RESULT_OK) {
-            val selectedImage: Uri = data!!.data
-            val bitmap = MediaStore.Images.Media.getBitmap(activity!!.applicationContext.contentResolver, selectedImage);
-            teacherDetailsViewModel.setPicture(resizeBitmap(bitmap, 800))
+        if (data != null) {
+
+            if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+                if (data.extras != null) {
+                    imageBitmap = data.extras.get("data") as Bitmap
+                    //imageBitmap = resizeBitmap(imageBitmap, 800)
+                    l_imageView.setImageBitmap(imageBitmap)
+                    pic_path = saveImageToInternalStorage(imageBitmap)
+                    isPictureSet = true
+                }
+            }
+
+            if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == Activity.RESULT_OK) {
+                pic_path = data!!.data
+                //imageBitmap = MediaStore.Images.Media.getBitmap(activity!!.applicationContext.contentResolver, pic_path);
+                //imageBitmap = resizeBitmap(imageBitmap, 800)
+                l_imageView.setImageURI(pic_path)
+                isPictureSet = true
+            }
+
         }
 
     }

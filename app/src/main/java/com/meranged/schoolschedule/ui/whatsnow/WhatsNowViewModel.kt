@@ -9,9 +9,7 @@ import com.meranged.schoolschedule.database.SchoolScheduleDao
 import com.meranged.schoolschedule.database.Subject
 import com.meranged.schoolschedule.database.Teacher
 import com.meranged.schoolschedule.database.TimeSlotWithSubjects
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 
 
 class WhatsNowViewModel(
@@ -59,6 +57,15 @@ class WhatsNowViewModel(
 
     init {
         _needToChangeState.value = 0
+        uiScope.launch {
+            clearPhotos()
+        }
+    }
+
+    private suspend fun clearPhotos(){
+        withContext(Dispatchers.IO) {
+            db.deleteTeachersPhotos()
+        }
     }
 
     /** Coroutine setup variables */

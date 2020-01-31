@@ -1,6 +1,7 @@
 package com.meranged.schoolschedule.ui.subjects
 
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -39,9 +40,13 @@ class  SubjectsAdapter(val clickListener: SubjectsListener): ListAdapter<Subject
             if (!item.teachers.isEmpty()){
                 s_name = item.teachers[0].firstName + " " + item.teachers[0].secondName + " " + item.teachers[0].thirdName
 
+                /*
                 if (item.teachers[0].photo != null) {
                     val arrayInputStream = ByteArrayInputStream(item.teachers[0].photo)
                     binding.teacherImageView.setImageBitmap(BitmapFactory.decodeStream(arrayInputStream))
+                }*/
+                if (item.teachers[0].photo_path.isNotEmpty()){
+                    binding.teacherImageView.setImageURI(Uri.parse(item.teachers[0].photo_path))
                 }
 
             }

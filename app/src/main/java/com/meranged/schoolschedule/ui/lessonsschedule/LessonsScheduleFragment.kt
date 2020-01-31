@@ -73,9 +73,18 @@ class LessonsScheduleFragment : Fragment() {
 
     fun onClickShowDetails(item: TimeSlotWithSubjects) {
 
-        view!!.findNavController()
-            .navigate(
-                LessonsScheduleFragmentDirections
-                    .actionNavigationLessonsScheduleToDayDetailsFragment(item.timeSlot.timeslotId))
+        if (item.subjects.isEmpty()) {
+            view!!.findNavController()
+                .navigate(
+                    LessonsScheduleFragmentDirections
+                        .actionNavigationLessonsScheduleToDayDetailsFragment(item.timeSlot.timeslotId)
+                )
+        } else {
+            view!!.findNavController()
+                .navigate(
+                    LessonsScheduleFragmentDirections
+                        .actionNavigationLessonsScheduleToHomeWorkFragment(item.timeSlot.timeslotId)
+                )
+        }
     }
 }

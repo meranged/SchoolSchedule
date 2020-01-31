@@ -73,4 +73,7 @@
     <string name="today_is_weekend_take_a_rest">Сегодня выходной, отдыхаем!</string>
     <string name="its_a_school_break">Перемена!</string>
     <string name="go_home">Домой!</string>
+    <string name="home_work_hint">Введите сюда домашнее задание или что нужно взять с собой на урок</string>
+    <string name="change_subject">Сменить предмет</string>
+    <string name="home_work_fragment_title">Домашнее задание</string>
 </resources>

@@ -32,14 +32,11 @@
                 android:id="@+id/weekDayName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/time_vertical_padding"
                 android:background="@color/colorPrimaryDark"
                 android:gravity="center"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/lessons_schedule_subject_name_text_size"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/teacherImageCard"
-                app:layout_constraintStart_toStartOf="parent"
                 tools:text="Понедельник" />
         </androidx.cardview.widget.CardView>
 
@@ -59,11 +56,14 @@
 
                 <TextView
                     android:id="@+id/lesson_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_width="@dimen/teacher_image_size_small2"
+                    android:layout_height="@dimen/teacher_image_size_small2"
+                    android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textSize="24sp"
+                    android:background="@drawable/rounder_corner_yellow"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/lesson_start"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="5" />
@@ -72,7 +72,6 @@
                     android:id="@+id/divider4"
                     android:layout_width="1dp"
                     android:layout_height="0dp"
-                    android:layout_marginStart="10dp"
                     android:background="?android:attr/listDivider"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/lesson_number"

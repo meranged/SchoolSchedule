@@ -1,11 +1,16 @@
 package com.meranged.schoolschedule.ui.whatsnow
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -35,6 +40,20 @@ class WhatsNowFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(activity!!.applicationContext,
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+            != PackageManager.PERMISSION_GRANTED) {
+
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(activity!!,
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    1)
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+        }
+
 
         val binding = DataBindingUtil.inflate<WhatsNowFragmentBinding>(
             inflater,
@@ -393,7 +412,9 @@ class WhatsNowFragment : Fragment() {
                 whatsNowBinding.timeToCallTextView.text = getStringTimeToCall(whatsNowViewModel.timeToCallCounter.value!!)
                 whatsNowBinding.whatsNextTitleCard.visibility = View.VISIBLE
                 whatsNowBinding.subjectCardView2.visibility = View.VISIBLE
+                whatsNowBinding.freeTimeCardView2.visibility = View.VISIBLE
                 setSubject2Card()
+
 
             }
             whatsNowViewModel.EVENING_AFTER_SCHOOL -> {
@@ -495,6 +516,11 @@ class WhatsNowFragment : Fragment() {
 
         whatsNowBinding.lessonNumber2.text = lesson.timeSlot.number.toString()
 
+        if (lesson.timeSlot.comment.isNotEmpty()){
+            whatsNowBinding.freeTimeTextView2.text = "Что было задано: " + lesson.timeSlot.comment
+            whatsNowBinding.freeTimeCardView2.visibility = View.VISIBLE
+        }
+
 
         if (teacher == null) {
             whatsNowBinding.teacherName2.visibility = View.INVISIBLE
@@ -506,13 +532,17 @@ class WhatsNowFragment : Fragment() {
                 getStringTeacherFIO(teacher)
             whatsNowBinding.teacherName2.visibility = View.VISIBLE
 
+            /*
             if (teacher.photo != null) {
                 val arrayInputStream = ByteArrayInputStream(teacher.photo)
                 whatsNowBinding.teacherImageView2.setImageBitmap(
                     BitmapFactory.decodeStream(
                         arrayInputStream
                     )
-                )
+                )*/
+            if (teacher.photo_path.isNotEmpty()){
+
+                whatsNowBinding.teacherImageView2.setImageURI(Uri.parse(teacher.photo_path))
 
             } else {
                 whatsNowBinding.teacherImageView2.setImageResource(R.drawable.ic_face_black_24dp)
@@ -544,13 +574,17 @@ class WhatsNowFragment : Fragment() {
                 getStringTeacherFIO(teacher)
             whatsNowBinding.teacherName.visibility = View.VISIBLE
 
+            /*
             if (teacher.photo != null) {
                 val arrayInputStream = ByteArrayInputStream(teacher.photo)
                 whatsNowBinding.teacherImageView.setImageBitmap(
                     BitmapFactory.decodeStream(
                         arrayInputStream
                     )
-                )
+                )*/
+            if (teacher.photo_path.isNotEmpty()){
+
+                whatsNowBinding.teacherImageView.setImageURI(Uri.parse(teacher.photo_path))
 
             } else {
                 whatsNowBinding.teacherImageView.setImageResource(R.drawable.ic_face_black_24dp)

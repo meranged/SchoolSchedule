@@ -22,5 +22,8 @@ data class Teacher(
     var nickName: String = "",
 
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB, name = "photo")
-    var photo: ByteArray? = null
+    var photo: ByteArray? = null,
+
+    @ColumnInfo(name = "photo_path")
+    var photo_path: String = ""
 )

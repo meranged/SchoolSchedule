@@ -1,6 +1,7 @@
 package com.meranged.schoolschedule.ui.teacherdetails
 
 import android.graphics.Bitmap
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.meranged.schoolschedule.database.SchoolScheduleDao
@@ -35,7 +36,10 @@ class TeacherDetailsViewModel(
      * viewModelJob allows us to cancel all coroutines started by this ViewModel.
      */
 
-    suspend fun updateTeacher(){
+    suspend fun updateTeacher(path: Uri?){
+        if (path != null) {
+            teacher.value!!.photo_path = path.toString()
+        }
         withContext(Dispatchers.IO) {
             db.update(teacher.value!!)
         }
@@ -46,7 +50,7 @@ class TeacherDetailsViewModel(
             db.deleteTeacher(teacher.value!!.teacherId)
         }
     }
-
+/*
     fun setPicture(p: Bitmap){
         val stream = ByteArrayOutputStream()
         p.compress(Bitmap.CompressFormat.JPEG, 100, stream)
@@ -56,6 +60,13 @@ class TeacherDetailsViewModel(
             updateTeacher()
         }
     }
+
+    fun setPicture(path: String){
+        teacher.value!!.photo_path = path
+        uiScope.launch {
+            updateTeacher()
+        }
+    }*/
 
 
     override fun onCleared() {
