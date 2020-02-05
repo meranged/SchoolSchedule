@@ -495,11 +495,57 @@ class WhatsNowFragment : Fragment() {
 
 
         if (hour > 0)
-            s_timeToCall = hour.toString() + " часов, "
+            s_timeToCall = hour.toString() + " " + getRightHours(hour.toInt()) + ", "
 
-        s_timeToCall = s_timeToCall + mins.toString() + " минут"
+        s_timeToCall = s_timeToCall + mins.toString() + " " + getRightMinutes(mins.toInt())
 
         return s_timeToCall
+    }
+
+    private fun getRightHours(hour: Int):String{
+
+        var i = hour
+        val teenArray = listOf<Int>(11, 12, 13, 14, 111, 112, 113, 114)
+
+        if (i in teenArray){
+            return "часов"
+        }
+
+        if (i >9){
+            i %= 10
+        }
+
+        if (i == 1){
+            return "час"
+        } else if ((i > 1) and (i <5)){
+            return "часа"
+        } else {
+            return "часов"
+        }
+
+    }
+
+    private fun getRightMinutes(mins: Int):String{
+
+        var i = mins
+        val teenArray = listOf<Int>(11, 12, 13, 14)
+
+        if (i in teenArray){
+            return "минут"
+        }
+
+        if (i >9){
+            i %= 10
+        }
+
+        if (i == 1){
+            return "минута"
+        } else if ((i > 1) and (i <5)){
+            return "минуты"
+        } else {
+            return "минут"
+        }
+
     }
 
     private fun setSubject2Card() {

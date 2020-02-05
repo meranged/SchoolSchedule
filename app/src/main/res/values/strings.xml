@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SchoolSchedule</string>
+    <string name="app_name">Школьное расписание Корнея</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -62,7 +62,6 @@
     <string name="dialog_option_get_photo_from_gallery">Выбрать фото</string>
     <string name="dialog_option_get_photo_title">Сделать фото учителя</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fab1_hint">Добавить</string>
     <string name="now_is_going">Сейчас идёт</string>
