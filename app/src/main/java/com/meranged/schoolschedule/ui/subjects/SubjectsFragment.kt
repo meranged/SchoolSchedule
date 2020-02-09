@@ -62,7 +62,6 @@ class SubjectsFragment : Fragment() {
 
         viewModel.timeslots_list_gen.observe(viewLifecycleOwner, Observer {
             it?.let {
-                viewModel.timeslots_list = it
                 adapter.notifyDataSetChanged()
             }
         })

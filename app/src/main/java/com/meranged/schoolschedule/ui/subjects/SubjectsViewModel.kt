@@ -21,7 +21,6 @@ class SubjectsViewModel(
 
     val subjects_with_teachers_list = db.getSubjectsWithTeacher()
     val timeslots_list_gen = db.getAllTimeSlots()
-    lateinit var timeslots_list: List<TimeSlot>
 
     init {
         uiScope.launch {
@@ -46,12 +45,16 @@ class SubjectsViewModel(
 
         var last_added_day = 0
 
-        if (!timeslots_list.isNullOrEmpty()) {
-            for (item in timeslots_list){
-                if(item.subject_id == subject_id){
-                    if (item.weekDay != last_added_day) {
-                        dayslist.add(item.weekDay)
-                        last_added_day = item.weekDay
+        if (timeslots_list_gen.value != null) {
+
+            if (!timeslots_list_gen.value.isNullOrEmpty()) {
+                val ts_list = timeslots_list_gen.value
+                for (item in ts_list!!) {
+                    if (item.subject_id == subject_id) {
+                        if (item.weekDay != last_added_day) {
+                            dayslist.add(item.weekDay)
+                            last_added_day = item.weekDay
+                        }
                     }
                 }
             }
