@@ -1,6 +1,7 @@
 package com.meranged.schoolschedule.ui.lessonsschedule
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

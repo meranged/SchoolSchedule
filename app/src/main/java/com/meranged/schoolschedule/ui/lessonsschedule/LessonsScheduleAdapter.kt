@@ -30,14 +30,15 @@ class  LessonsScheduleAdapter(val clickListener: LessonsScheduleListener): ListA
             }
 
             fun from(parent: ViewGroup): ViewHolder {
+               // Log.i("SSLOG", "LessonScheduleAdapter.from_start")
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding =
                     ListItemTimeSlotWithSubjectAndWeekdayBinding.inflate(layoutInflater, parent, false)
+               // Log.i("SSLOG", "LessonScheduleAdapter.from_end")
                 return ViewHolder(binding)
             }
 
             fun getTeacherFromList(teacher_id:Long):Teacher?{
-
                 for (teacher in t_list){
                     if (teacher.teacherId == teacher_id)
                         return teacher
@@ -53,6 +54,7 @@ class  LessonsScheduleAdapter(val clickListener: LessonsScheduleListener): ListA
         fun bind(item: TimeSlotWithSubjects, clickListener: LessonsScheduleListener) {
 
             val res = binding.root.context.resources
+
             binding.timeslotwithsubjects = item
             binding.clickListener = clickListener
 
@@ -68,9 +70,9 @@ class  LessonsScheduleAdapter(val clickListener: LessonsScheduleListener): ListA
 
             if (item.timeSlot.number == 1){
                 binding.weekDayName.text = res.getStringArray(R.array.weekdays_array)[item.timeSlot.weekDay-1]
-                binding.weekdayNameCard.visibility = View.VISIBLE
+                binding.weekDayName.visibility = View.VISIBLE
             } else {
-                binding.weekdayNameCard.visibility = View.GONE
+                binding.weekDayName.visibility = View.GONE
             }
             /*
             binding.lessonStart.setOnClickListener{
@@ -113,9 +115,7 @@ class  LessonsScheduleAdapter(val clickListener: LessonsScheduleListener): ListA
 
             binding.lessonStart.text = "${convertIntTo00(item.timeSlot.startTimeHours)}:${convertIntTo00(item.timeSlot.startTimeMinutes)}"
             binding.lessonFinish.text = "${convertIntTo00(item.timeSlot.finishTimeHours)}:${convertIntTo00(item.timeSlot.finishTimeMinutes)}"
-
         }
-
 
     }
 

@@ -228,8 +228,8 @@ interface SchoolScheduleDao {
     @Transaction
     fun checkAndFillTimeSlots(){
         val count = getCountOfTimeSlots()
-        Log.i("dbdebug","count of timeslots = $count")
-        if (count < 6){
+        Log.i("SSLOG","checkAndFillTimeSlots: count of timeslots = $count")
+        if (count < 5){
             fillTimeSlotsInitialData()
         }
     }
@@ -237,7 +237,7 @@ interface SchoolScheduleDao {
     @Transaction
     fun checkAndFillTeachersList(){
         val count = getCountOfTeachers()
-        Log.i("dbdebug","count of teachers = $count")
+        Log.i("SSLOG","checkAndFillTeachersList: count of teachers = $count")
         if (count < 1){
             fillTeachersInitialData()
         }
@@ -246,7 +246,7 @@ interface SchoolScheduleDao {
     @Transaction
     fun checkAndFillSubjectsList(){
         val count = getCountOfSubjects()
-        Log.i("dbdebug","count of subjects = $count")
+        Log.i("SSLOG","checkAndFillSubjectsList: count of subjects = $count")
         if (count < 1){
             fillSubjectsInitialData()
         }
@@ -267,5 +267,12 @@ interface SchoolScheduleDao {
     @Transaction
     @Query("UPDATE teacher SET photo = null")
     fun deleteTeachersPhotos()
+
+    @Transaction
+    fun initiateDB(){
+        checkAndFillTeachersList()
+        checkAndFillSubjectsList()
+        checkAndFillTimeSlots()
+    }
 
 }

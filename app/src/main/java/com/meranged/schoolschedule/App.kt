@@ -16,6 +16,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         mContext = this
+
     }
 
     companion object {

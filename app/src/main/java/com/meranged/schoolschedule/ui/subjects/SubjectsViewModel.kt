@@ -23,16 +23,8 @@ class SubjectsViewModel(
     val timeslots_list_gen = db.getAllTimeSlots()
 
     init {
-        uiScope.launch {
-            fillDPB()
-        }
     }
 
-    private suspend fun fillDPB() {
-        withContext(Dispatchers.IO) {
-            db.checkAndFillSubjectsList()
-        }
-    }
 
     override fun onCleared() {
         super.onCleared()

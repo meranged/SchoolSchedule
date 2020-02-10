@@ -19,15 +19,6 @@ class MyTeachersViewModel(
     val teachers_with_subjects_list = db.getTeacherWithSubjects()
 
     init {
-        uiScope.launch {
-            fillDPB()
-        }
-    }
-
-    private suspend fun fillDPB() {
-        withContext(Dispatchers.IO) {
-            db.checkAndFillTeachersList()
-        }
     }
 
     override fun onCleared() {

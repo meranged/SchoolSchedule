@@ -41,20 +41,6 @@ class WhatsNowFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        // Here, thisActivity is the current activity
-        if (ContextCompat.checkSelfPermission(activity!!.applicationContext,
-                Manifest.permission.READ_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED) {
-
-                // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(activity!!,
-                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                    1)
-
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-        }
-
-
         val binding = DataBindingUtil.inflate<WhatsNowFragmentBinding>(
             inflater,
             R.layout.whats_now_fragment, container, false
@@ -586,12 +572,18 @@ class WhatsNowFragment : Fragment() {
                         arrayInputStream
                     )
                 )*/
-            if (teacher.photo_path.isNotEmpty()){
 
-                whatsNowBinding.teacherImageView2.setImageURI(Uri.parse(teacher.photo_path))
+            if (ContextCompat.checkSelfPermission(activity!!.applicationContext,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)
+                == PackageManager.PERMISSION_GRANTED) {
 
-            } else {
-                whatsNowBinding.teacherImageView2.setImageResource(R.drawable.ic_face_black_24dp)
+                if (teacher.photo_path.isNotEmpty()) {
+
+                    whatsNowBinding.teacherImageView2.setImageURI(Uri.parse(teacher.photo_path))
+
+                } else {
+                    whatsNowBinding.teacherImageView2.setImageResource(R.drawable.ic_face_black_24dp)
+                }
             }
             whatsNowBinding.teacherImageView2.visibility = View.VISIBLE
         }
@@ -628,13 +620,22 @@ class WhatsNowFragment : Fragment() {
                         arrayInputStream
                     )
                 )*/
-            if (teacher.photo_path.isNotEmpty()){
 
-                whatsNowBinding.teacherImageView.setImageURI(Uri.parse(teacher.photo_path))
+            if (ContextCompat.checkSelfPermission(activity!!.applicationContext,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)
+                == PackageManager.PERMISSION_GRANTED) {
 
-            } else {
-                whatsNowBinding.teacherImageView.setImageResource(R.drawable.ic_face_black_24dp)
+                if (teacher.photo_path.isNotEmpty()){
+
+                    whatsNowBinding.teacherImageView.setImageURI(Uri.parse(teacher.photo_path))
+
+                } else {
+                    whatsNowBinding.teacherImageView.setImageResource(R.drawable.ic_face_black_24dp)
+                }
+
+
             }
+
             whatsNowBinding.teacherImageView.visibility = View.VISIBLE
 
         }

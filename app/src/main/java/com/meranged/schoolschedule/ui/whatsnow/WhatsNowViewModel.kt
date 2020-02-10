@@ -58,13 +58,13 @@ class WhatsNowViewModel(
     init {
         _needToChangeState.value = 0
         uiScope.launch {
-            clearPhotos()
+            checkAndInitiateDB()
         }
     }
 
-    private suspend fun clearPhotos(){
+    private suspend fun checkAndInitiateDB(){
         withContext(Dispatchers.IO) {
-            db.deleteTeachersPhotos()
+            db.initiateDB()
         }
     }
 

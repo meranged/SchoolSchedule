@@ -19,14 +19,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/weekdayNameCard"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/time_card_distance"
-            android:background="@color/colorPrimary"
-            app:cardCornerRadius="@dimen/time_card_radius"
-            app:cardElevation="@dimen/time_card_elevation">
+
 
             <TextView
                 android:id="@+id/weekDayName"
@@ -38,7 +31,7 @@
                 android:textSize="@dimen/lessons_schedule_subject_name_text_size"
                 android:textStyle="bold"
                 tools:text="Понедельник" />
-        </androidx.cardview.widget.CardView>
+
 
 
         <androidx.cardview.widget.CardView
@@ -51,7 +44,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:onClick="@{() -> clickListener.onClick(timeslotwithsubjects)}">
 
                 <TextView
@@ -63,9 +56,7 @@
                     android:textSize="24sp"
                     android:background="@drawable/rounder_corner_yellow"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/lesson_start"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     tools:text="5" />
 
                 <View
@@ -84,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/colorPrimary"
                     android:padding="1dp"
-                    android:text="08:00"
+                    tools:text="08:00"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/lessons_schedule_subject_name_text_size"
@@ -99,7 +90,7 @@
                     android:layout_marginEnd="5dp"
                     android:background="@color/colorPrimary"
                     android:padding="1dp"
-                    android:text="08:40"
+                    tools:text="08:40"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/lessons_schedule_subject_name_text_size"
@@ -114,7 +105,7 @@
                     android:textSize="@dimen/lessons_schedule_subject_name_text_size"
                     app:layout_constraintEnd_toStartOf="@id/divider3"
                     app:layout_constraintStart_toStartOf="@+id/divider4"
-                    app:layout_constraintTop_toBottomOf="@+id/lesson_start"
+                    app:layout_constraintTop_toBottomOf="@+id/divider2"
                     tools:text="203" />
 
                 <ImageView
@@ -150,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
-                    android:text="@string/subject1_name"
+                    tools:text="@string/subject1_name"
                     android:textSize="@dimen/lessons_schedule_subject_name_text_size"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/teacherImageView"
@@ -169,11 +160,7 @@
                     app:layout_constraintStart_toEndOf="@+id/divider3"
                     app:layout_constraintTop_toTopOf="@id/divider2"
                     tools:text="Хотовицкая" />
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
         </androidx.cardview.widget.CardView>
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

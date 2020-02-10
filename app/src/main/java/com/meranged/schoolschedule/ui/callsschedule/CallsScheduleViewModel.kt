@@ -20,16 +20,8 @@ class CallsScheduleViewModel(
     val etalon_slots = db.getEtalonTimeSlots()
 
     init {
-        uiScope.launch {
-            fillDPB()
-        }
     }
 
-    private suspend fun fillDPB(){
-        withContext(Dispatchers.IO) {
-            db.checkAndFillTimeSlots()
-        }
-    }
 
     suspend fun updateWeekTimeSlot(ts: TimeSlot) {
             withContext(Dispatchers.IO) {
