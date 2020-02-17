@@ -398,7 +398,6 @@ class WhatsNowFragment : Fragment() {
                 whatsNowBinding.timeToCallTextView.text = getStringTimeToCall(whatsNowViewModel.timeToCallCounter.value!!)
                 whatsNowBinding.whatsNextTitleCard.visibility = View.VISIBLE
                 whatsNowBinding.subjectCardView2.visibility = View.VISIBLE
-                whatsNowBinding.freeTimeCardView2.visibility = View.VISIBLE
                 setSubject2Card()
 
 
