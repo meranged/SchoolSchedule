@@ -661,6 +661,8 @@ class WhatsNowFragment : Fragment() {
             timerValue = timerValue + 24 * 60 * 60000 * (weekDay - curWeekDay)
         } else if (weekDay < curWeekDay) {
             timerValue = timerValue + 24 * 60 * 60000 * (7 - curWeekDay + weekDay)
+        } else if (call_time_mins < now_time_mins ){
+            timerValue = timerValue + 24 * 60 * 60000 * 7
         }
 
         return timerValue
