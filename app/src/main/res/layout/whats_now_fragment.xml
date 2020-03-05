@@ -139,9 +139,10 @@
 
                     <TextView
                         android:id="@+id/roomNumber"
-                        android:layout_width="wrap_content"
+                        android:layout_width="65dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="1dp"
+                        android:textAlignment="center"
                         android:textSize="@dimen/lessons_schedule_subject_name_text_size"
                         app:layout_constraintEnd_toStartOf="@id/divider3"
                         app:layout_constraintStart_toStartOf="@+id/divider4"
@@ -341,14 +342,15 @@
 
                     <TextView
                         android:id="@+id/roomNumber2"
-                        android:layout_width="wrap_content"
+                        android:layout_width="65dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="1dp"
                         android:textSize="@dimen/lessons_schedule_subject_name_text_size"
+                        android:textAlignment="center"
                         app:layout_constraintEnd_toStartOf="@id/divider32"
                         app:layout_constraintStart_toStartOf="@+id/divider42"
                         app:layout_constraintTop_toBottomOf="@+id/lesson_start2"
-                        tools:text="203" />
+                        tools:text="Кабинет информатики" />
 
                     <ImageView
                         android:id="@+id/teacherImageView2"

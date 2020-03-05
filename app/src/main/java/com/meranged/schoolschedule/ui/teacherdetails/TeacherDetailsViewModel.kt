@@ -50,24 +50,6 @@ class TeacherDetailsViewModel(
             db.deleteTeacher(teacher.value!!.teacherId)
         }
     }
-/*
-    fun setPicture(p: Bitmap){
-        val stream = ByteArrayOutputStream()
-        p.compress(Bitmap.CompressFormat.JPEG, 100, stream)
-        teacher.value!!.photo = stream.toByteArray()
-
-        uiScope.launch {
-            updateTeacher()
-        }
-    }
-
-    fun setPicture(path: String){
-        teacher.value!!.photo_path = path
-        uiScope.launch {
-            updateTeacher()
-        }
-    }*/
-
 
     override fun onCleared() {
         super.onCleared()

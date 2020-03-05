@@ -30,11 +30,9 @@ class  LessonsScheduleAdapter(val clickListener: LessonsScheduleListener): ListA
             }
 
             fun from(parent: ViewGroup): ViewHolder {
-               // Log.i("SSLOG", "LessonScheduleAdapter.from_start")
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding =
                     ListItemTimeSlotWithSubjectAndWeekdayBinding.inflate(layoutInflater, parent, false)
-               // Log.i("SSLOG", "LessonScheduleAdapter.from_end")
                 return ViewHolder(binding)
             }
 
@@ -60,6 +58,7 @@ class  LessonsScheduleAdapter(val clickListener: LessonsScheduleListener): ListA
 
             binding.teacherName.text = ""
             binding.lessonNumber.text = item.timeSlot.number.toString()
+            binding.teacherImageView.visibility = View.INVISIBLE
 
             if (item.timeSlot.comment.isEmpty()) {
                 binding.lessonNumber.background.alpha = 0
@@ -74,37 +73,25 @@ class  LessonsScheduleAdapter(val clickListener: LessonsScheduleListener): ListA
             } else {
                 binding.weekDayName.visibility = View.GONE
             }
-            /*
-            binding.lessonStart.setOnClickListener{
-                Log.i("SS_LOG LessonSchedule", item.timeSlot.toString())
-            }*/
-
 
             if (!item.subjects.isEmpty()){
                 binding.subjectName.text = item.subjects[0].name
                 binding.roomNumber.text = item.subjects[0].roomNumber
                 binding.subjectName.visibility = View.VISIBLE
                 binding.roomNumber.visibility = View.VISIBLE
-                binding.teacherImageView.visibility = View.VISIBLE
 
                 if (item.subjects[0].teacherId > 0){
-
                     val l_teacher = getTeacherFromList(item.subjects[0].teacherId)
                     if (l_teacher != null) {
                         binding.teacherName.text = l_teacher.firstName + " " + l_teacher.secondName
 
-                        /*
-                        if (l_teacher.photo != null) {
-                            val arrayInputStream = ByteArrayInputStream(l_teacher.photo)
-                            binding.teacherImageView.setImageBitmap(BitmapFactory.decodeStream(arrayInputStream))
-                        }*/
-
+                        binding.teacherImageView.visibility = View.VISIBLE
                         if (l_teacher.photo_path.isNotEmpty()){
                             binding.teacherImageView.setImageURI(Uri.parse(l_teacher.photo_path))
+                        } else {
+                            binding.teacherImageView.setImageResource(R.drawable.ic_face_black_24dp)
                         }
-
                     }
-
                 }
 
             } else {

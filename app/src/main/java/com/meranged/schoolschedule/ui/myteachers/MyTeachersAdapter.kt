@@ -1,6 +1,5 @@
 package com.meranged.schoolschedule.ui.myteachers
 
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.meranged.schoolschedule.database.Teacher
 import com.meranged.schoolschedule.database.TeacherWithSubjects
 import com.meranged.schoolschedule.databinding.ListItemTeacherBinding
-import java.io.ByteArrayInputStream
 
 class  MyTeachersAdapter(val clickListener: MyTeachersListener): ListAdapter<TeacherWithSubjects, MyTeachersAdapter.ViewHolder>(MyTeachersDiffCallback()) {
 
@@ -30,16 +28,8 @@ class  MyTeachersAdapter(val clickListener: MyTeachersListener): ListAdapter<Tea
 
             binding.teacher = item.teacher
 
-            //val res = binding.root.context.resources
-
             binding.teacherFIO.text = item.teacher.firstName + " " + item.teacher.secondName + " " + item.teacher.thirdName
             binding.teacherSubjectsList.text = ""
-
-            /*
-            if (item.teacher.photo != null) {
-                val arrayInputStream = ByteArrayInputStream(item.teacher.photo)
-                binding.teacherImageView.setImageBitmap(BitmapFactory.decodeStream(arrayInputStream))
-            }*/
 
             if (item.teacher.photo_path.isNotEmpty()){
                 binding.teacherImageView.setImageURI(Uri.parse(item.teacher.photo_path))
@@ -73,9 +63,7 @@ class  MyTeachersAdapter(val clickListener: MyTeachersListener): ListAdapter<Tea
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.bind(getItem(position)!!, clickListener)
-
     }
-
 }
 
 class MyTeachersDiffCallback : DiffUtil.ItemCallback<TeacherWithSubjects>() {
@@ -88,7 +76,6 @@ class MyTeachersDiffCallback : DiffUtil.ItemCallback<TeacherWithSubjects>() {
                 or (oldItem.teacher.secondName != newItem.teacher.secondName)
                 or (oldItem.teacher.thirdName != newItem.teacher.thirdName)
                 or (oldItem.teacher.nickName != newItem.teacher.nickName))
-
     }
 }
 

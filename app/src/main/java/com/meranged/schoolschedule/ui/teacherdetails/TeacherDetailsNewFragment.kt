@@ -84,14 +84,6 @@ class TeacherDetailsNewFragment : Fragment() {
                         teacher.photo_path = pic_path.toString()
                     }
                 }
-/*
-                if ((photo != null) and isPictureSet){
-                    val stream = ByteArrayOutputStream()
-                    val bm = photo.drawable.toBitmap()
-
-                    bm.compress(Bitmap.CompressFormat.JPEG, 100, stream)
-                    teacher.photo = stream.toByteArray()
-                }*/
 
                 uiScope.launch {
                     insertTeacher(teacher)
@@ -139,7 +131,7 @@ class TeacherDetailsNewFragment : Fragment() {
 
             if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
                 if (data.extras != null) {
-                    imageBitmap = data.extras.get("data") as Bitmap
+                    imageBitmap = data.extras!!.get("data") as Bitmap
                     //imageBitmap = resizeBitmap(imageBitmap, 800)
                     photo.setImageBitmap(imageBitmap)
                     pic_path = saveImageToInternalStorage(imageBitmap)
@@ -149,8 +141,6 @@ class TeacherDetailsNewFragment : Fragment() {
 
             if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == Activity.RESULT_OK) {
                 pic_path = data!!.data
-                //imageBitmap = MediaStore.Images.Media.getBitmap(activity!!.applicationContext.contentResolver, pic_path);
-                //imageBitmap = resizeBitmap(imageBitmap, 800)
                 photo.setImageURI(pic_path)
                 isPictureSet = true
             }

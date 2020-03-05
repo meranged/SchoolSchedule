@@ -1,13 +1,10 @@
 package com.meranged.schoolschedule.ui.callsschedule
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.meranged.schoolschedule.App
 import com.meranged.schoolschedule.R
 import com.meranged.schoolschedule.convertIntTo00
 import com.meranged.schoolschedule.database.TimeSlot
@@ -30,18 +27,12 @@ class  CallsScheduleAdapter(val clickListener: CallsScheduleListener): ListAdapt
 
             binding.tslot = item
 
-            /*
-            binding.lessonTitle.setOnClickListener{
-                Log.i("SS_LOG CallSchedule", item.toString())
-            }*/
-
             val res = binding.root.context.resources
 
             binding.lessonTitle.text = res.getString(R.string.title_lesson, item.number)
             binding.lessonStart.text = "${convertIntTo00(item.startTimeHours)}:${convertIntTo00(item.startTimeMinutes)}"
             binding.lessonFinish.text = "${convertIntTo00(item.finishTimeHours)}:${convertIntTo00(item.finishTimeMinutes)}"
 
-            //binding.executePendingBindings()
             binding.clickListener = clickListener
         }
 

@@ -92,22 +92,12 @@ class WhatsNowViewModel(
             override fun onTick(millisUntilFinished: Long) {
                 _timeToCallCounter.value = millisUntilFinished
                 timeToCall = millisUntilFinished
-                Log.i(
-                    "SS_LOG",
-                    "setTimer1, _needToChangeState.value = " + _needToChangeState.value.toString()
-                )
-                Log.i("SS_LOG", "setTimer, ttc = " + _timeToCallCounter.value.toString())
             }
 
             override fun onFinish() {
                 _needToChangeState.value = _needToChangeState.value!! + 1
                 timeToCall = 0
                 _timeToCallCounter.value = 0
-                Log.i(
-                    "SS_LOG",
-                    "setTimer2, _needToChangeState.value = " + _needToChangeState.value.toString()
-                )
-                Log.i("SS_LOG", "setTimer, ttc = " + _timeToCallCounter.value.toString())
             }
         }.start()
     }

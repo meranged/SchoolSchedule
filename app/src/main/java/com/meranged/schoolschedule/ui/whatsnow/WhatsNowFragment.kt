@@ -65,7 +65,6 @@ class WhatsNowFragment : Fragment() {
         whatsNowViewModel.time_slots_with_subjects.observe(this, Observer {
             it?.let {
 
-                Log.i("SS_LOG", "time_slots_with_subjects.observe")
                 val l_list: MutableList<TimeSlotWithSubjects> = ArrayList()
 
                 for (item in it) {
@@ -82,14 +81,12 @@ class WhatsNowFragment : Fragment() {
         whatsNowViewModel.teachers_list.observe(this, Observer {
             it?.let {
                 whatsNowViewModel.t_list = it
-                Log.i("SS_LOG", "teachers_list.observe, amount = " + it.size.toString())
                 refreshScreen()
             }
         })
 
         whatsNowViewModel.needToChangeState.observe(this, Observer {
             it?.let {
-                Log.i("SS_LOG", "needToChangeState.observe")
                 calculateNextState()
             }
         })
@@ -97,7 +94,6 @@ class WhatsNowFragment : Fragment() {
         whatsNowViewModel.timeToCallCounter.observe(this, Observer {
             it?.let {
                 whatsNowViewModel.timeToCall = it
-                Log.i("SS_LOG", "now_time.observe")
                 refreshScreen()
             }
         })
@@ -115,14 +111,10 @@ class WhatsNowFragment : Fragment() {
         val curMin = calendar.get(MINUTE)
         val weekDay = getRightDayNumber(calendar.get(DAY_OF_WEEK))
 
-        Log.i("SS_LOG", "calculateNextState")
-
         val l_list = whatsNowViewModel.lessons_list
 
 
         if (l_list.isNotEmpty()) {
-
-            Log.i("SS_LOG", "calculateNextState.NotEmpty")
 
             val firstLesson = getFirstLessonOfTheDay(weekDay)
             val lastLesson = getLastLessonOfTheDay(weekDay)
@@ -563,15 +555,6 @@ class WhatsNowFragment : Fragment() {
                 getStringTeacherFIO(teacher)
             whatsNowBinding.teacherName2.visibility = View.VISIBLE
 
-            /*
-            if (teacher.photo != null) {
-                val arrayInputStream = ByteArrayInputStream(teacher.photo)
-                whatsNowBinding.teacherImageView2.setImageBitmap(
-                    BitmapFactory.decodeStream(
-                        arrayInputStream
-                    )
-                )*/
-
             if (ContextCompat.checkSelfPermission(activity!!.applicationContext,
                     Manifest.permission.READ_EXTERNAL_STORAGE)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -610,15 +593,6 @@ class WhatsNowFragment : Fragment() {
             whatsNowBinding.teacherName.text =
                 getStringTeacherFIO(teacher)
             whatsNowBinding.teacherName.visibility = View.VISIBLE
-
-            /*
-            if (teacher.photo != null) {
-                val arrayInputStream = ByteArrayInputStream(teacher.photo)
-                whatsNowBinding.teacherImageView.setImageBitmap(
-                    BitmapFactory.decodeStream(
-                        arrayInputStream
-                    )
-                )*/
 
             if (ContextCompat.checkSelfPermission(activity!!.applicationContext,
                     Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -673,12 +647,6 @@ class WhatsNowFragment : Fragment() {
         val cal = Calendar.getInstance()
         cal.firstDayOfWeek = Calendar.MONDAY
 
-        //четверг, 9-45
-        //cal.set(DAY_OF_WEEK, 4)
-        //cal.set(HOUR_OF_DAY, 9)
-        //cal.set(MINUTE, 45)
-
         return cal
     }
-
 }

@@ -119,8 +119,6 @@ class TeacherDetailsFragment : Fragment() {
 
         teacherDetailsViewModel.teacher.observe(this, Observer{
             if (it.photo_path.isNotEmpty()){
-                //val arrayInputStream = ByteArrayInputStream(it.photo)
-                //l_imageView.setImageBitmap(BitmapFactory.decodeStream(arrayInputStream))
                 l_imageView.setImageURI(Uri.parse(it.photo_path))
             } else {
                 Log.i("Teacher=", it.toString())
@@ -154,8 +152,7 @@ class TeacherDetailsFragment : Fragment() {
 
             if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
                 if (data.extras != null) {
-                    imageBitmap = data.extras.get("data") as Bitmap
-                    //imageBitmap = resizeBitmap(imageBitmap, 800)
+                    imageBitmap = data.extras!!.get("data") as Bitmap
                     l_imageView.setImageBitmap(imageBitmap)
                     pic_path = saveImageToInternalStorage(imageBitmap)
                     isPictureSet = true
@@ -163,9 +160,7 @@ class TeacherDetailsFragment : Fragment() {
             }
 
             if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == Activity.RESULT_OK) {
-                pic_path = data!!.data
-                //imageBitmap = MediaStore.Images.Media.getBitmap(activity!!.applicationContext.contentResolver, pic_path);
-                //imageBitmap = resizeBitmap(imageBitmap, 800)
+                pic_path = data.data
                 l_imageView.setImageURI(pic_path)
                 isPictureSet = true
             }

@@ -23,15 +23,6 @@ class App : Application() {
         private var mContext: Context? = null
         val context: Context?
             get() = mContext
-/*
-        lateinit var subjectsViewModel: SubjectsViewModel
-
-        lateinit var whatsNowViewModel: WhatsNowViewModel
-
-        lateinit var myTeachersViewModel: MyTeachersViewModel
-        lateinit var lessonsScheduleViewModel:LessonsScheduleViewModel
-        lateinit var callsScheduleViewModel: CallsScheduleViewModel*/
-
 
     }
 }

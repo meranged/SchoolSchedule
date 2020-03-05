@@ -45,9 +45,6 @@ class DayDetailsViewModel(
     suspend fun updateTimeSlot(subject_id:Long){
 
 
-        Log.i("ttt_subject_id", "=" + subject_id.toString())
-        Log.i("ttt_timeslot", timeslot.value.toString())
-
         withContext(Dispatchers.IO) {
 
             val ts = timeslot.value!!
