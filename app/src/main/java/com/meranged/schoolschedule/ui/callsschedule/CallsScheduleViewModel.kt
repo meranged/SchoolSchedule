@@ -24,9 +24,34 @@ class CallsScheduleViewModel(
 
 
     suspend fun updateWeekTimeSlot(ts: TimeSlot) {
+        if (is_valid_ts(ts)) {
             withContext(Dispatchers.IO) {
                 db.updateWeekTimeSlot(ts)
             }
+        }
+    }
+
+    fun is_valid_ts(ts: TimeSlot): Boolean {
+        if ((ts.startTimeHours*60 + ts.startTimeMinutes) >= (ts.finishTimeHours*60 + ts.finishTimeMinutes)){
+            return false
+        }
+
+        if (ts.number > 1){
+            if (etalon_slots.value != null) {
+                for (prev_lesson in etalon_slots.value!!){
+                    if (prev_lesson.number == (ts.number - 1)){
+                        if ((prev_lesson.finishTimeHours*60 + prev_lesson.finishTimeMinutes) >=
+                            (ts.startTimeHours*60 + ts.startTimeMinutes)){
+                            return false
+                        }
+                    }
+                }
+            } else {
+                return false
+            }
+        }
+
+        return true
     }
 
     suspend fun addTimeSlot(){

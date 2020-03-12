@@ -117,6 +117,10 @@ class CallsScheduleFragment : Fragment() {
         val timePicker = TimePickerDialog(this.context, listener, hour, min, true).show()
     }
 
+    fun check_new_time(){
+
+    }
+
     fun uts(item: TimeSlot) {
         val viewModelJob = Job()
 
