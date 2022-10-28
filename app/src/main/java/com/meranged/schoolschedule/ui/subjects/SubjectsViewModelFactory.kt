@@ -10,7 +10,7 @@ class SubjectsViewModelFactory(
     private val application: Application
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(SubjectsViewModel::class.java)) {
             return SubjectsViewModel(dataSource, application) as T
         }

@@ -26,7 +26,7 @@ class TeacherDetailsViewModelFactory(
     private val dataSource: SchoolScheduleDao
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(TeacherDetailsViewModel::class.java)) {
             return TeacherDetailsViewModel(teacher_id, dataSource) as T
         }
